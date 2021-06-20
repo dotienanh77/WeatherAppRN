@@ -8,6 +8,7 @@ import {
   Button,
   ScrollView,
   StatusBar,
+  Image,
   ImageBackground,
   useWindowDimensions,
   Animated,
@@ -22,17 +23,17 @@ import SearchIcon from '../assets/search.svg';
 
 import Locations from '../model/locations';
 
-const WeatherIcon = weatherType => {
-  if (weatherType === 'Night') {
+const WeatherIcon = weatherMain => {
+  if (weatherMain === 'Night') {
     return <MoonIcon width={34} height={34} fill="#fff" />;
   }
-  if (weatherType === 'Cloudy') {
+  if (weatherMain === 'Clouds') {
     return <CloudIcon width={34} height={34} fill="#fff" />;
   }
-  if (weatherType === 'Sunny') {
+  if (weatherMain === 'Sunny') {
     return <SunIcon width={34} height={34} fill="#fff" />;
   }
-  if (weatherType === 'Rainy') {
+  if (weatherMain === 'Rainy') {
     return <RainIcon width={34} height={34} fill="#fff" />;
   }
 };
@@ -49,7 +50,9 @@ const HomeScreen = ({navigation}) => {
         console.log(data);
         setTemperature(data.main.temp);
         setPressure(data.main.pressure);
-        setDateTime(data.dt);
+        let date = new Date(data.dt);
+        console.log("====================");
+        console.log(date.getDate());
         setHumidity(data.main.humidity);
         setWind(data.wind.speed);
         setWeatherMain(data.weather[0].main);
@@ -80,15 +83,27 @@ const HomeScreen = ({navigation}) => {
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'center',
+              justifyContent: 'space-between',
               alignItems: 'flex-start',
-              paddingTop: 40,
+              paddingTop: 60,
+              paddingHorizontal: 20,
             }}>
-            <Button
+            {/* <Button
               title={'GOTO DETAIL SCREEN'}
+              //         <Image
+              //   style={styles.tinyLogo}
+              //   source={require('@expo/snack-static/react-native-logo.png')}
+              // />
               onPress={() => navigation.navigate('DetailScreen')}
               // color="#841584"
-            />
+            /> */}
+            <TouchableOpacity
+              onPress={() => navigation.navigate('DetailScreen')}>
+              <Image
+                style={styles.tinyLogo}
+                source={require('../assets/look.png')}
+              />
+            </TouchableOpacity>
             <Button
               title={'SEARCH SCREEN'}
               onPress={() => navigation.navigate('SearchScreen')}
@@ -106,7 +121,7 @@ const HomeScreen = ({navigation}) => {
                   temperature / 1,
                 )}\u2103`}</Text>
                 <View style={{flexDirection: 'row'}}>
-                  <Text style={styles.textWeather}>Icon</Text>
+                  {WeatherIcon({weatherMain})}
                   <Text style={styles.textWeather}>{weatherMain}</Text>
                 </View>
               </View>
@@ -237,6 +252,10 @@ const styles = StyleSheet.create({
     height: 5,
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderRadius: 5,
+  },
+  tinyLogo: {
+    width: 30,
+    height: 30,
   },
   appHeader: {
     flexDirection: 'row',
