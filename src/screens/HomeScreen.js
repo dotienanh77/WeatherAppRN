@@ -4,8 +4,8 @@ import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {
   View,
   Text,
-  Button,
   StyleSheet,
+  Button,
   ScrollView,
   StatusBar,
   ImageBackground,
@@ -13,58 +13,164 @@ import {
   Animated,
   TouchableOpacity,
 } from 'react-native';
-// import SunIcon from '../assets/sun.svg';
-// import CloudIcon from '../assets/cloudy.svg';
-// import MoonIcon from '../assets/moon.svg';
-// import RainIcon from '../assets/rain.svg';
+import SunIcon from '../assets/sun.svg';
+import CloudIcon from '../assets/cloudy.svg';
+import MoonIcon from '../assets/moon.svg';
+import RainIcon from '../assets/rain.svg';
 import MenuIcon from '../assets/menu.svg';
 import SearchIcon from '../assets/search.svg';
 
-// const WeatherIcon = (weatherType) => {
-//   if (weatherType === 'Night') {
-//     return <MoonIcon width={34} height={34} fill="#fff" />;
-//   }
-//   if (weatherType === 'Cloudy') {
-//     return <CloudIcon width={34} height={34} fill="#fff" />;
-//   }
-//   if (weatherType === 'Sunny') {
-//     return <SunIcon width={34} height={34} fill="#fff" />;
-//   }
-//   if (weatherType === 'Rainy') {
-//     return <RainIcon width={34} height={34} fill="#fff" />;
-//   }
-// };
+import Locations from '../model/locations';
+
+const WeatherIcon = weatherType => {
+  if (weatherType === 'Night') {
+    return <MoonIcon width={34} height={34} fill="#fff" />;
+  }
+  if (weatherType === 'Cloudy') {
+    return <CloudIcon width={34} height={34} fill="#fff" />;
+  }
+  if (weatherType === 'Sunny') {
+    return <SunIcon width={34} height={34} fill="#fff" />;
+  }
+  if (weatherType === 'Rainy') {
+    return <RainIcon width={34} height={34} fill="#fff" />;
+  }
+};
+
 const HomeScreen = ({navigation}) => {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const requestUrl =
+          'https://api.openweathermap.org/data/2.5/weather?appid=86183a23377ed034aef7aad102f43d64&units=metric&id=1566083';
+        const response = await fetch(requestUrl);
+        const responseJSON = await response.json();
+        const data = responseJSON;
+        console.log(data);
+        setTemperature(data.main.temp);
+        setPressure(data.main.pressure);
+        setDateTime(data.dt);
+        setHumidity(data.main.humidity);
+        setWind(data.wind.speed);
+        setWeatherMain(data.weather[0].main);
+      } catch (error) {
+        console.log('fail...', error.message);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const [temperature, setTemperature] = useState(0);
+  const [datetime, setDateTime] = useState(0);
+  const [wind, setWind] = useState(0);
+  const [humidity, setHumidity] = useState(0);
+  const [pressure, setPressure] = useState(0);
+  const [weatherMain, setWeatherMain] = useState(0);
+  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
+  // const scrollX = useRef(new Animated.Value(0)).current;
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      {/* <View style={styles.appHeader}>
-        <TouchableOpacity onPress={() => {}}>
-          <SearchIcon width={25} height={25} fill="#000" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-          <MenuIcon width={25} height={25} fill="#000" />
-        </TouchableOpacity>
-      </View> */}
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'yellow',
-        }}>
-        <Text>Home Screen</Text>
-
-        <Button
-          title={'GOTO DETAIL SCREEN'}
-          onPress={() => navigation.navigate('DetailScreen')}
-          // color="#841584"
-        />
-        <Button
-          title={'SEARCH SCREEN'}
-          onPress={() => navigation.navigate('SearchScreen')}
-          // color="#841584"
-        />
+      <StatusBar barStyle="light-content" />
+      <View style={{width: windowWidth, height: windowHeight}}>
+        <ImageBackground
+          source={require('../assets/night2.jpg')}
+          style={{
+            flex: 1,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              paddingTop: 40,
+            }}>
+            <Button
+              title={'GOTO DETAIL SCREEN'}
+              onPress={() => navigation.navigate('DetailScreen')}
+              // color="#841584"
+            />
+            <Button
+              title={'SEARCH SCREEN'}
+              onPress={() => navigation.navigate('SearchScreen')}
+              // color="#841584"
+            />
+          </View>
+          <View style={styles.container}>
+            <View style={styles.topInfoWrapper}>
+              <View>
+                <Text style={styles.city}>Ho Chi Minh</Text>
+                <Text style={styles.time}>{datetime}</Text>
+              </View>
+              <View>
+                <Text style={styles.temperature}>{`${Math.floor(
+                  temperature / 1,
+                )}\u2103`}</Text>
+                <View style={{flexDirection: 'row'}}>
+                  <Text style={styles.textWeather}>Icon</Text>
+                  <Text style={styles.textWeather}>{weatherMain}</Text>
+                </View>
+              </View>
+            </View>
+            <View
+              style={{
+                borderBottomColor: 'rgba(255,255,255,0.7)',
+                marginTop: 20,
+                borderBottomWidth: 1,
+              }}
+            />
+            <View style={styles.bottomInfoWrapper}>
+              <View style={{alignItems: 'center'}}>
+                <Text style={styles.infoText}>Wind</Text>
+                <Text style={[styles.infoText, {fontSize: 24}]}>{wind}</Text>
+                <Text style={styles.infoText}>km/h</Text>
+                <View style={styles.infoBar}>
+                  <View
+                    style={{
+                      width: 5,
+                      height: 5,
+                      backgroundColor: '#69F0AE',
+                      borderRadius: 5,
+                    }}
+                  />
+                </View>
+              </View>
+              <View style={{alignItems: 'center'}}>
+                <Text style={styles.infoText}>Pressure</Text>
+                <Text style={[styles.infoText, {fontSize: 24}]}>
+                  {pressure}
+                </Text>
+                <Text style={styles.infoText}>Pa</Text>
+                <View style={styles.infoBar}>
+                  <View
+                    style={{
+                      width: 5,
+                      height: 5,
+                      backgroundColor: '#F44336',
+                      borderRadius: 5,
+                    }}
+                  />
+                </View>
+              </View>
+              <View style={{alignItems: 'center'}}>
+                <Text style={styles.infoText}>Humidty</Text>
+                <Text style={[styles.infoText, {fontSize: 24}]}>
+                  {humidity}
+                </Text>
+                <Text style={styles.infoText}>%</Text>
+                <View style={styles.infoBar}>
+                  <View
+                    style={{
+                      width: 5,
+                      height: 5,
+                      backgroundColor: '#F44336',
+                      borderRadius: 5,
+                    }}
+                  />
+                </View>
+              </View>
+            </View>
+          </View>
+        </ImageBackground>
       </View>
     </>
   );
@@ -99,18 +205,15 @@ const styles = StyleSheet.create({
   city: {
     fontSize: 30,
     color: '#fff',
-    // fontFamily: 'Lato-Regular ',
     fontWeight: 'bold',
   },
   time: {
     color: '#fff',
-    // fontFamily: 'Lato-Regular ',
     fontWeight: 'bold',
   },
   temperature: {
     color: '#fff',
     fontSize: 85,
-    // fontFamily: 'Lato-Thin',
   },
   textWeather: {
     color: '#fff',
@@ -146,3 +249,14 @@ const styles = StyleSheet.create({
     height: getStatusBarHeight() + 40,
   },
 });
+
+// {
+//   /* <View style={styles.appHeader}>
+//         <TouchableOpacity onPress={() => {}}>
+//           <SearchIcon width={25} height={25} fill="#000" />
+//         </TouchableOpacity>
+//         <TouchableOpacity onPress={() => {}}>
+//           <MenuIcon width={25} height={25} fill="#000" />
+//         </TouchableOpacity>
+//       </View> */
+// }

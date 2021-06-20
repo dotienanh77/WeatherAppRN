@@ -1,0 +1,52 @@
+export default locations = [
+  {
+    id: 1,
+    city: 'Kolkata',
+    dateTime: '07:50 PM — Wednesday, 26 May 2021',
+    temperature: '27\u2103',
+    weatherType: 'Night',
+    wind: 14,
+    rain: 50,
+    humidity: 70,
+  },
+  {
+    id: 2,
+    city: 'London',
+    dateTime: '03:20 PM — Wednesday, 26 May 2021',
+    temperature: '15\u2103',
+    weatherType: 'Cloudy',
+    wind: 8,
+    rain: 7,
+    humidity: 82,
+  },
+  {
+    id: 3,
+    city: 'New York',
+    dateTime: '10:20 AM — Wednesday, 26 May 2021',
+    temperature: '17\u2103',
+    weatherType: 'Sunny',
+    wind: 5,
+    rain: 15,
+    humidity: 61,
+  },
+  {
+    id: 4,
+    city: 'Sydney',
+    dateTime: '12:20 AM — Thursday, 27 May 2021',
+    temperature: '10\u2103',
+    weatherType: 'Rainy',
+    wind: 20,
+    rain: 70,
+    humidity: 91,
+  },
+];
+
+const DataCity = [
+  {city: 'Hà Nội', id: 1581130},
+  {city: 'Huế', id: 1580240},
+  {city: 'Vinh', id: 1562798},
+  {city: 'Hồ Chí Minh', id: 1580578},
+  {city: 'Hội An', id: 1580541},
+  {city: 'Cần Thơ', id: 1586203},
+  {city: 'Qui Nhơn', id: 1568574},
+];
