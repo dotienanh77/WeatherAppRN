@@ -1,107 +1,72 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {Text, View, TouchableOpacity, StyleSheet, Button} from 'react-native';
+import React, {useState} from 'react';
+import {Text, View, TouchableOpacity, StyleSheet, Button,ImageBackground,TextInput} from 'react-native';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import MenuIcon from '../assets/menu.svg';
 import SearchIcon from '../assets/search.svg';
 const DetailScreen = ({navigation}) => {
+  const image = { uri: "https://www.dungplus.com/wp-content/uploads/2019/10/anh-avatar-dep-nhat.jpg" }; 
+  const [textVn, setTextVn] = useState("");
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'cyan',
-      }}>
-      <Text>Detail Screen</Text>
-      <Text>Viet nam vo dich</Text>
-      <View style={styles.appHeader}>
-        <TouchableOpacity onPress={() => {}}>
-          <Text>Click me</Text>
-          {/* <SearchIcon width={25} height={25} fill="#000" /> */}
-        </TouchableOpacity>
-        {/* <TouchableOpacity onPress={() => {}}>
-          <MenuIcon width={25} height={25} fill="#000" />
-        </TouchableOpacity> */}
-      </View>
-      <Button title="back" onPress={() => navigation.navigate('Weather App')} />
-    </View>
+    <ImageBackground source={image} style={{ flex: 1,flexDirection:'column', resizeMode: "cover", justifyContent: "flex-start"}}>
+         <View style={styles.container2}>
+              <View style={styles.containerTextInput}>
+                <TextInput 
+                  onChangeText ={setTextVn}
+                  placeholder= "Province/City Enter" style={styles.textInput} />
+              </View>
+              <View style={styles.containerTouchSearch}> 
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Weather App')}
+                  style={styles.TouchSearch}>
+                  <Text style={styles.textStyleSearch}>Tìm</Text>
+                </TouchableOpacity>
+              </View>
+          </View>
+      </ImageBackground>
+//
+      // <ImageBackground source={image} style={{ flex: 1,flexDirection:'column', resizeMode: "cover", justifyContent: "flex-start"}}>
+      // <View style={styles.container2}>
+      //     <View style={styles.containerTextInput}>
+      //       <TextInput 
+      //         onChangeText ={setTextVn}
+      //         placeholder= "Province/City Enter" style={styles.textInput} />
+      //     </View>
+      //     <View style={styles.containerTouchSearch}> 
+      //       <TouchableOpacity
+      //         onPress={() => navigate('Detail', {textVn:[textVn]})}
+      //         style={styles.TouchSearch}>
+      //         <Text style={styles.textStyleSearch}>Tìm</Text>
+      //       </TouchableOpacity>
+      //     </View>
+      // </View>
+      // </ImageBackground>
   );
 };
 export default DetailScreen;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    padding: 20,
-  },
-  normalDot: {
-    height: 5,
-    width: 5,
-    borderRadius: 5,
-    marginHorizontal: 4,
-    backgroundColor: '#fff',
-  },
-  indicatorWrapper: {
-    flexDirection: 'row',
-    position: 'absolute',
-    top: 160,
-    left: 20,
-    justifyContent: 'center',
+  container2: {flex: 0.1, flexDirection: 'row', justifyContent: 'center'},
+  containerTouchSearch: {
+    flex: 0.2,
     alignItems: 'center',
+    marginTop: 5,
   },
-  topInfoWrapper: {
-    flex: 1,
-    marginTop: 160,
-    justifyContent: 'space-between',
+  containerTextInput: {
+    flex : 0.8,
+    marginTop: 5,
   },
-  city: {
-    fontSize: 30,
-    color: '#fff',
-    // fontFamily: 'Lato-Regular ',
-    fontWeight: 'bold',
-  },
-  time: {
-    color: '#fff',
-    // fontFamily: 'Lato-Regular ',
-    fontWeight: 'bold',
-  },
-  temperature: {
-    color: '#fff',
-    fontSize: 85,
-    // fontFamily: 'Lato-Thin',
-  },
-  textWeather: {
-    color: '#fff',
-    fontSize: 25,
-    lineHeight: 34,
-    fontWeight: 'bold',
-    marginLeft: 10,
-  },
-  bottomInfoWrapper: {
-    flexDirection: 'row',
-    marginVertical: 20,
-    justifyContent: 'space-between',
-  },
-  infoText: {
-    fontSize: 14,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  infoBar: {
-    width: 45,
-    height: 5,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+  textInput: {
+    borderWidth: 1,
     borderRadius: 5,
+    marginLeft: 5,
+    height: 40,
+    fontSize: 15,
+    paddingHorizontal: 5,
   },
-  appHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    position: 'absolute',
-    paddingHorizontal: 20,
-    top: 0,
-    width: '100%',
-    height: getStatusBarHeight() + 40,
+  TouchSearch: {
+    padding: 10,
+    backgroundColor: 'green',
+    borderRadius: 100,
   },
+  textStyleSearch: {fontSize: 15, fontWeight: '500', color: 'black'},
 });

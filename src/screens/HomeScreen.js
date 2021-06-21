@@ -47,12 +47,15 @@ const HomeScreen = ({navigation}) => {
         const response = await fetch(requestUrl);
         const responseJSON = await response.json();
         const data = responseJSON;
-        console.log(data);
         setTemperature(data.main.temp);
         setPressure(data.main.pressure);
-        let date = new Date(data.dt);
-        console.log("====================");
-        console.log(date.getDate());
+        //
+        let date = new Date().getDate();
+        let month = new Date().getMonth()+1;
+        let year = new Date().getFullYear();
+        setDateTime(date);
+        setMonthTime(month);
+        setYearTime(year);
         setHumidity(data.main.humidity);
         setWind(data.wind.speed);
         setWeatherMain(data.weather[0].main);
@@ -64,7 +67,9 @@ const HomeScreen = ({navigation}) => {
   }, []);
 
   const [temperature, setTemperature] = useState(0);
-  const [datetime, setDateTime] = useState(0);
+  const [dateTime, setDateTime] = useState(0);
+  const [monthTime, setMonthTime] = useState(0);
+  const [yearTime, setYearTime] = useState(0);
   const [wind, setWind] = useState(0);
   const [humidity, setHumidity] = useState(0);
   const [pressure, setPressure] = useState(0);
@@ -114,7 +119,7 @@ const HomeScreen = ({navigation}) => {
             <View style={styles.topInfoWrapper}>
               <View>
                 <Text style={styles.city}>Ho Chi Minh</Text>
-                <Text style={styles.time}>{datetime}</Text>
+                <Text style={styles.time}>{dateTime} - {monthTime} - {yearTime}</Text>
               </View>
               <View>
                 <Text style={styles.temperature}>{`${Math.floor(
