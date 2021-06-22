@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import type {Node} from 'react';
@@ -14,20 +15,11 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false,
+        headerShown: false,
         }}>
-        <Stack.Screen
-          name="Weather App"
-          component={HomeScreen}
-          options={{title: ' '}}
-        />
+        <Stack.Screen name="WeatherApp" component={HomeScreen}  />
+        <Stack.Screen name="SearchScreen" component={SearchScreen} />
         <Stack.Screen name="DetailScreen" component={DetailScreen} />
-        <Stack.Screen
-          name="SearchScreen"
-          component={SearchScreen}
-          options={{title: ' '}}
-          backgroundColor={'gray'}
-        />
       </Stack.Navigator>
     </NavigationContainer>
   );

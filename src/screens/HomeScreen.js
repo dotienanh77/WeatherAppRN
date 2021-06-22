@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useRef, useEffect, useState} from 'react';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
@@ -37,7 +38,6 @@ const WeatherIcon = weatherMain => {
     return <RainIcon width={34} height={34} fill="#fff" />;
   }
 };
-
 const HomeScreen = ({navigation}) => {
   useEffect(() => {
     async function fetchData() {
@@ -47,15 +47,16 @@ const HomeScreen = ({navigation}) => {
         const response = await fetch(requestUrl);
         const responseJSON = await response.json();
         const data = responseJSON;
-        setTemperature(data.main.temp);
-        setPressure(data.main.pressure);
-        //
+
         let date = new Date().getDate();
-        let month = new Date().getMonth()+1;
+        let month = new Date().getMonth() + 1;
         let year = new Date().getFullYear();
         setDateTime(date);
         setMonthTime(month);
         setYearTime(year);
+
+        setTemperature(data.main.temp);
+        setPressure(data.main.pressure);
         setHumidity(data.main.humidity);
         setWind(data.wind.speed);
         setWeatherMain(data.weather[0].main);
@@ -82,44 +83,30 @@ const HomeScreen = ({navigation}) => {
       <View style={{width: windowWidth, height: windowHeight}}>
         <ImageBackground
           source={require('../assets/night2.jpg')}
-          style={{
-            flex: 1,
-          }}>
+          style={{flex: 1}}>
           <View
             style={{
+              flex: 0.1,
               flexDirection: 'row',
               justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              paddingTop: 60,
+              alignItems: 'center',
               paddingHorizontal: 20,
             }}>
-            {/* <Button
-              title={'GOTO DETAIL SCREEN'}
-              //         <Image
-              //   style={styles.tinyLogo}
-              //   source={require('@expo/snack-static/react-native-logo.png')}
-              // />
-              onPress={() => navigation.navigate('DetailScreen')}
-              // color="#841584"
-            /> */}
             <TouchableOpacity
-              onPress={() => navigation.navigate('DetailScreen')}>
+              onPress={() => navigation.navigate('SearchScreen')}>
               <Image
                 style={styles.tinyLogo}
                 source={require('../assets/look.png')}
               />
             </TouchableOpacity>
-            <Button
-              title={'SEARCH SCREEN'}
-              onPress={() => navigation.navigate('SearchScreen')}
-              // color="#841584"
-            />
           </View>
           <View style={styles.container}>
             <View style={styles.topInfoWrapper}>
               <View>
                 <Text style={styles.city}>Ho Chi Minh</Text>
-                <Text style={styles.time}>{dateTime} - {monthTime} - {yearTime}</Text>
+                <Text style={styles.time}>
+                  {dateTime} - {monthTime} - {yearTime}
+                </Text>
               </View>
               <View>
                 <Text style={styles.temperature}>{`${Math.floor(
@@ -142,7 +129,7 @@ const HomeScreen = ({navigation}) => {
               <View style={{alignItems: 'center'}}>
                 <Text style={styles.infoText}>Wind</Text>
                 <Text style={[styles.infoText, {fontSize: 24}]}>{wind}</Text>
-                <Text style={styles.infoText}>km/h</Text>
+                <Text style={styles.infoText}>m/s</Text>
                 <View style={styles.infoBar}>
                   <View
                     style={{
@@ -159,7 +146,7 @@ const HomeScreen = ({navigation}) => {
                 <Text style={[styles.infoText, {fontSize: 24}]}>
                   {pressure}
                 </Text>
-                <Text style={styles.infoText}>Pa</Text>
+                <Text style={styles.infoText}>Bar</Text>
                 <View style={styles.infoBar}>
                   <View
                     style={{
@@ -172,7 +159,7 @@ const HomeScreen = ({navigation}) => {
                 </View>
               </View>
               <View style={{alignItems: 'center'}}>
-                <Text style={styles.infoText}>Humidty</Text>
+                <Text style={styles.infoText}>Humidity</Text>
                 <Text style={[styles.infoText, {fontSize: 24}]}>
                   {humidity}
                 </Text>
@@ -273,14 +260,3 @@ const styles = StyleSheet.create({
     height: getStatusBarHeight() + 40,
   },
 });
-
-// {
-//   /* <View style={styles.appHeader}>
-//         <TouchableOpacity onPress={() => {}}>
-//           <SearchIcon width={25} height={25} fill="#000" />
-//         </TouchableOpacity>
-//         <TouchableOpacity onPress={() => {}}>
-//           <MenuIcon width={25} height={25} fill="#000" />
-//         </TouchableOpacity>
-//       </View> */
-// }
