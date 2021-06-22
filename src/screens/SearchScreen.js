@@ -9,6 +9,7 @@ import SearchIcon from '../assets/search.svg';
 const SearchScreen = ({ navigation: { navigate } })=> {
   const image = { uri: "https://tenovi.net/public/upload/images/2018/07/15/153162365428.jpg" }; 
   const [textVn, setTextVn] = useState("");
+  const [text, setText] = useState("");
   ////
   const SearchButton = (textVn) => {
     if (textVn.length <= 0 ) {
@@ -18,8 +19,6 @@ const SearchScreen = ({ navigation: { navigate } })=> {
       return navigate('DetailScreen', {textVn:[textVn]});
     }
   };
-  ////
-  ////
   return (
        <ImageBackground source={image} style={styles.containerImageBackGround}>
   {/* ROW 1 */}
@@ -42,7 +41,9 @@ const SearchScreen = ({ navigation: { navigate } })=> {
               <TouchableOpacity           
                   onPress={() => SearchButton(textVn)}            
                   style={styles.TouchSearch}>
-                  <Text style={styles.textStyleSearch}>Search</Text>
+                  <Image
+                  style={styles.tinyLogo}
+                  source={require('../assets/look.png')}/>  
                 </TouchableOpacity>
             </View>
           </View>
@@ -74,23 +75,22 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderWidth: 2,
-    borderRadius: 5,
+    borderRadius: 10,
     marginVertical:5,
-    marginHorizontal: 5,
+    marginLeft: 5,
     height: 45,
-    fontSize: 15,
+    fontSize: 20,
     fontWeight:'bold',
     paddingLeft: 10,
   },
   TouchSearch: {
     height:45,
+    borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'gray',
     borderRadius: 10,
     marginVertical:5,
     marginHorizontal: 5,
   },
-  textStyleSearch: {fontSize: 15, fontWeight: '500', color: 'black'},
 },
 );

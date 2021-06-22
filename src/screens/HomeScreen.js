@@ -24,21 +24,24 @@ import SearchIcon from '../assets/search.svg';
 
 import Locations from '../model/locations';
 
-const WeatherIcon = weatherMain => {
-  if (weatherMain === 'Night') {
-    return <MoonIcon width={34} height={34} fill="#fff" />;
-  }
-  if (weatherMain === 'Clouds') {
-    return <CloudIcon width={34} height={34} fill="#fff" />;
-  }
-  if (weatherMain === 'Sunny') {
-    return <SunIcon width={34} height={34} fill="#fff" />;
-  }
-  if (weatherMain === 'Rainy') {
-    return <RainIcon width={34} height={34} fill="#fff" />;
-  }
-};
+
 const HomeScreen = ({navigation}) => {
+
+  const WeatherIcon = weatherMain => {
+    if (weatherMain === 'Night') {
+      return <MoonIcon width={34} height={34} fill="#fff" />;
+    }
+    if (weatherMain === 'Clouds') {
+      return <CloudIcon width={34} height={34} fill="#fff" />;
+    }
+    if (weatherMain === 'Sunny') {
+      return <SunIcon width={34} height={34} fill="#fff" />;
+    }
+    if (weatherMain === 'Rainy') {
+      return <RainIcon width={34} height={34} fill="#fff" />;
+    }
+};
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -74,9 +77,8 @@ const HomeScreen = ({navigation}) => {
   const [wind, setWind] = useState(0);
   const [humidity, setHumidity] = useState(0);
   const [pressure, setPressure] = useState(0);
-  const [weatherMain, setWeatherMain] = useState(0);
+  const [weatherMain, setWeatherMain] = useState('');
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
-  // const scrollX = useRef(new Animated.Value(0)).current;
   return (
     <>
       <StatusBar barStyle="light-content" />

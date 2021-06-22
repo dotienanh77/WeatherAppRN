@@ -9,7 +9,6 @@ import HomeScreen from './src/screens/HomeScreen';
 import DetailScreen from './src/screens/DetailScreen';
 import SearchScreen from './src/screens/SearchScreen';
 const Stack = createStackNavigator();
-
 const App = () => {
   return (
     <NavigationContainer>
