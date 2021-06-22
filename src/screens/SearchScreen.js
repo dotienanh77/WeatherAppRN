@@ -19,6 +19,7 @@ const SearchScreen = ({ navigation: { navigate } })=> {
     }
   };
   ////
+  ////
   return (
        <ImageBackground source={image} style={styles.containerImageBackGround}>
   {/* ROW 1 */}
