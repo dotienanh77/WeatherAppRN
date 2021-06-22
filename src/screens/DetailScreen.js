@@ -25,7 +25,8 @@ import MenuIcon from '../assets/menu.svg';
 import SearchIcon from '../assets/search.svg';
 import Locations from '../model/locations';
 
-const DetailScreen = ({navigation, route}) => {
+// const DetailScreen = ({navigation, route}) => {
+  const DetailScreen = ({ navigation: { navigate },route })=> {
   
   // const WeatherIcon = weatherMain => {
   //   if (weatherMain === 'Night') {
@@ -87,14 +88,16 @@ const DetailScreen = ({navigation, route}) => {
 {/* ROW 1 */}
           <View style={styles.viewBackAndHome}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('SearchScreen')}>
+              // onPress={() => navigation.navigate('SearchScreen')}>
+              onPress={() => navigate('SearchScreen')}>
               <Image
                 style={styles.tinyLogo}
                 source={require('../assets/back.png')}
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate('WeatherApp')}>
+              // onPress={() => navigation.navigate('WeatherApp')}>
+              onPress={() => navigate('WeatherApp')}>
               <Image
                 style={styles.tinyLogo}
                 source={require('../assets/backHome.png')}
