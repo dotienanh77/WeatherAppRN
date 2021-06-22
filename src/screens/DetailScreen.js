@@ -44,7 +44,7 @@ const DetailScreen = ({navigation, route}) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const requestUrl = `http://api.openweathermap.org/data/2.5/weather?appid=86183a23377ed034aef7aad102f43d64&units=metric&q=${cityName}`;
+        const requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=e6da80eb2a72709285a540c26f7feb2e&units=metric`;
         const response = await fetch(requestUrl);
         const responseJSON = await response.json();
         const data = responseJSON;
@@ -89,18 +89,22 @@ const DetailScreen = ({navigation, route}) => {
               justifyContent: 'space-between',
               alignItems: 'center',
               paddingHorizontal: 20,
+              marginTop:10,
             }}>
             <TouchableOpacity
               onPress={() => navigation.navigate('SearchScreen')}>
               <Image
                 style={styles.tinyLogo}
-                source={require('../assets/look.png')}
+                source={require('../assets/back.png')}
               />
             </TouchableOpacity>
-            <Button
-              title={'Back Home'}
-              onPress={() => navigation.navigate('WeatherApp')}
-            />
+            <TouchableOpacity
+              onPress={() => navigation.navigate('WeatherApp')}>
+              <Image
+                style={styles.tinyLogo}
+                source={require('../assets/backHome.png')}
+              />
+            </TouchableOpacity>
           </View>
           {/* ROW 2 CITY NAME*/}
           <View
@@ -117,9 +121,7 @@ const DetailScreen = ({navigation, route}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{color: '#fff', fontSize: 70}}>{`${Math.floor(
-                temp / 1,
-              )}\u2103`}</Text>
+              <Text style={{color: '#fff', fontSize: 70}}>{`${Math.floor(temp / 1)}\u2103`}</Text>
             </View>
             <View
               style={{
