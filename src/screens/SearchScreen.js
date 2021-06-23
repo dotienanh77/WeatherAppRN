@@ -7,9 +7,8 @@ import MenuIcon from '../assets/menu.svg';
 import SearchIcon from '../assets/search.svg';
 
 const SearchScreen = ({ navigation: { navigate } })=> {
-  const image = { uri: 'https://tenovi.net/public/upload/images/2018/07/15/153162365428.jpg' };
-  const [textVn, setTextVn] = useState('');
   ////
+  const [textVn, setTextVn] = useState('');
   const SearchButton = (textVn) => {
     if (textVn.length <= 0 ) {
       alert('Please Enter Information!');
@@ -18,8 +17,9 @@ const SearchScreen = ({ navigation: { navigate } })=> {
       return navigate('DetailScreen', {textVn:[textVn]});
     }
   };
+  ////
   return (
-       <ImageBackground source={image} style={styles.containerImageBackGround}>
+       <ImageBackground source={require('../assets/searchBackground.jpg')} style={styles.containerImageBackGround}>
          <View style = {{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
   {/* ROW 1 */}
           <View style = {styles.containerTouchBack}>
@@ -47,11 +47,12 @@ const SearchScreen = ({ navigation: { navigate } })=> {
                 </TouchableOpacity>
             </View>
           </View>
-          </View>
+        </View>
         </ImageBackground>
   );
 };
 export default SearchScreen;
+////
 const styles = StyleSheet.create({
   containerImageBackGround : {flex: 1, resizeMode: 'cover'},
 //// Row 1

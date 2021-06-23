@@ -28,7 +28,6 @@ import Locations from '../model/locations';
 const MoreDetailScreen2 = ({navigation, route}) => {
 
   const cityName = route.params.text[0];
-  console.log(cityName);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -75,19 +74,15 @@ const MoreDetailScreen2 = ({navigation, route}) => {
           <View style={styles.viewBackAndHome}>
             <TouchableOpacity
               onPress={() => navigation.navigate('DetailScreen')}>
-              {/* onPress={() => navigate('SearchScreen')}> */}
               <Image
                 style={styles.tinyLogo}
-                source={require('../assets/back.png')}
-              />
+                source={require('../assets/back.png')}/>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => navigation.navigate('HomeScreen')}>
-              {/* onPress={() => navigate('WeatherApp')}> */}
               <Image
                 style={styles.tinyLogo}
-                source={require('../assets/backHome.png')}
-              />
+                source={require('../assets/backHome.png')}/>
             </TouchableOpacity>
           </View>
 {/* ROW 2 CITY NAME*/}

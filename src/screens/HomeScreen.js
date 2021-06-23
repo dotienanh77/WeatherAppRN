@@ -106,7 +106,6 @@ const HomeScreen = ({navigation}) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => navigation.navigate('MoreDetailScreen')}>
-              {/* onPress={() => navigate('WeatherApp')}> */}
               <Image
                 style={styles.tinyLogo1}
                 source={require('../assets/detail.png')}

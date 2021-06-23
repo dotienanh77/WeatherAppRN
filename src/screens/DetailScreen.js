@@ -26,25 +26,11 @@ import MenuIcon from '../assets/menu.svg';
 import SearchIcon from '../assets/search.svg';
 import Locations from '../model/locations';
 
-// const DetailScreen = ({navigation, route}) => {
   const DetailScreen = ({ navigation: { navigate },route })=> {
 
-  // const WeatherIcon = weatherMain => {
-  //   if (weatherMain === 'Night') {
-  //     return <MoonIcon width={34} height={34} fill="#fff" />;
-  //   }
-  //   if (weatherMain === 'Clouds') {
-  //     return <CloudIcon width={34} height={34} fill="#fff" />;
-  //   }
-  //   if (weatherMain === 'Sunny') {
-  //     return <SunIcon width={34} height={34} fill="#fff" />;
-  //   }
-  //   if (weatherMain === 'Rainy') {
-  //     return <RainIcon width={34} height={34} fill="#fff" />;
-  //   }
-  // };
   const cityName = route.params.textVn[0];
-
+  const [text, setText] = useState("");
+  const [textRemind, setTextRemind] = useState("");
   useEffect(() => {
     async function fetchData() {
       try {
@@ -62,6 +48,20 @@ import Locations from '../model/locations';
         setGust(data.wind.gust);
         setDeg(data.wind.deg);
 
+        setText(cityName);
+  
+        if ((data.weather[0].main) === 'Rain'){
+          setTextRemind('Note: The weather of the City is Rainy. Bring an umbrella or raincoat when going out.');
+        }
+        else if ((data.weather[0].main) === 'Clouds'){
+          setTextRemind('Note: The weather of the City is Cloud. Have you a good day.');
+        }
+        else if ((data.weather[0].main) === 'Clear'){
+          setTextRemind('Note: The weather of the City is Sunny. Please bring a hat or sunscreen when going out.');
+        }
+        else{
+          setTextRemind('')
+        }
       } catch (error) {
         console.log('fail...', error.message);
       }
@@ -80,13 +80,6 @@ import Locations from '../model/locations';
   const [deg, setDeg] = useState(0);
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
-  const [text, setText] = useState("");
-  const DetailButton = (text) => {
-      setTimeout(() => {
-        setText(route.params.textVn[0]);
-        return navigate('MoreDetailScreen2', {text:[text]});
-    }, 2000);
-  };
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -98,20 +91,16 @@ import Locations from '../model/locations';
 {/* ROW 1 */}
           <View style={styles.viewBackAndHome}>
             <TouchableOpacity
-              // onPress={() => navigation.navigate('SearchScreen')}>
                onPress={() => navigate('SearchScreen')}> 
               <Image
                 style={styles.tinyLogo}
-                source={require('../assets/back.png')}
-              />
+                source={require('../assets/back.png')}/>
             </TouchableOpacity>
             <TouchableOpacity
-              // onPress={() => navigation.navigate('MoreDetailScreen2')}>
-              onPress={() => DetailButton(text)}>
+              onPress={() => navigate('MoreDetailScreen2', {text:[text]})}>
               <Image
                 style={styles.tinyLogo1}
-                source={require('../assets/detail.png')}
-              />
+                source={require('../assets/detail.png')}/>
             </TouchableOpacity>
           </View>
 {/* ROW 2 CITY NAME*/}
@@ -167,7 +156,10 @@ import Locations from '../model/locations';
               <Text style={styles.textWind3}>{gust}</Text>
             </View>
           </View>
+          <View style={{flex:0.1}}>
+            <Text style={styles.textRemind}>{textRemind}</Text>
           </View>
+        </View>
         </ImageBackground>
       </View>
     </>
@@ -290,4 +282,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 10,
   },
+  textRemind:{color:'#fff',marginTop:10,marginHorizontal: 10},
 });
