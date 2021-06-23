@@ -9,7 +9,6 @@ import SearchIcon from '../assets/search.svg';
 const SearchScreen = ({ navigation: { navigate } })=> {
   const image = { uri: "https://tenovi.net/public/upload/images/2018/07/15/153162365428.jpg" }; 
   const [textVn, setTextVn] = useState("");
-  const [text, setText] = useState("");
   ////
   const SearchButton = (textVn) => {
     if (textVn.length <= 0 ) {
@@ -24,7 +23,7 @@ const SearchScreen = ({ navigation: { navigate } })=> {
   {/* ROW 1 */}
           <View style = {styles.containerTouchBack}>
             <TouchableOpacity
-              onPress={() => navigate('WeatherApp')}>
+              onPress={() => navigate('HomeScreen')}>
               <Image
               style={styles.tinyLogo}
               source={require('../assets/back.png')}/>

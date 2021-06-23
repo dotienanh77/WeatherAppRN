@@ -25,25 +25,10 @@ import MenuIcon from '../assets/menu.svg';
 import SearchIcon from '../assets/search.svg';
 import Locations from '../model/locations';
 
-// const DetailScreen = ({navigation, route}) => {
-  const DetailScreen = ({ navigation: { navigate },route })=> {
-  
-  // const WeatherIcon = weatherMain => {
-  //   if (weatherMain === 'Night') {
-  //     return <MoonIcon width={34} height={34} fill="#fff" />;
-  //   }
-  //   if (weatherMain === 'Clouds') {
-  //     return <CloudIcon width={34} height={34} fill="#fff" />;
-  //   }
-  //   if (weatherMain === 'Sunny') {
-  //     return <SunIcon width={34} height={34} fill="#fff" />;
-  //   }
-  //   if (weatherMain === 'Rainy') {
-  //     return <RainIcon width={34} height={34} fill="#fff" />;
-  //   }
-  // };
-  const cityName = route.params.textVn[0];
+const MoreDetailScreen2 = ({navigation, route}) => {
 
+  const cityName = route.params.text[0];
+  console.log(cityName);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -67,7 +52,7 @@ import Locations from '../model/locations';
     }
     fetchData();
   }, []);
-  
+
   const [temp, setTemp] = useState(0);
   const [tempMax, setTempMax] = useState(0);
   const [tempMin, setTempMin] = useState(0);
@@ -79,13 +64,6 @@ import Locations from '../model/locations';
   const [deg, setDeg] = useState(0);
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
-  const [text, setText] = useState("");
-  const DetailButton = (text) => {
-      setTimeout(() => {
-        setText(route.params.textVn[0]);
-        return navigate('MoreDetailScreen2', {text:[text]});
-    }, 2000);
-  };
   return (
     <> 
       <StatusBar barStyle="light-content" />
@@ -96,25 +74,25 @@ import Locations from '../model/locations';
 {/* ROW 1 */}
           <View style={styles.viewBackAndHome}>
             <TouchableOpacity
-              // onPress={() => navigation.navigate('SearchScreen')}>
-               onPress={() => navigate('SearchScreen')}> 
+              onPress={() => navigation.navigate('DetailScreen')}>
+              {/* onPress={() => navigate('SearchScreen')}> */}
               <Image
                 style={styles.tinyLogo}
                 source={require('../assets/back.png')}
               />
             </TouchableOpacity>
             <TouchableOpacity
-              // onPress={() => navigation.navigate('MoreDetailScreen2')}>
-              onPress={() => DetailButton(text)}>
+              onPress={() => navigation.navigate('HomeScreen')}>
+              {/* onPress={() => navigate('WeatherApp')}> */}
               <Image
-                style={styles.tinyLogo1}
-                source={require('../assets/detail.png')}
+                style={styles.tinyLogo}
+                source={require('../assets/backHome.png')}
               />
             </TouchableOpacity>
           </View>
 {/* ROW 2 CITY NAME*/}
           <View style={styles.viewCity}>
-            <Text style={styles.textCity}>{route.params.textVn[0]}</Text>
+            <Text style={styles.textCity}>{route.params.text[0]}</Text>
           </View>
 {/* ROW 3 TEMPERATURE AND WEATHER STYLE CITY*/}
           <View style={styles.viewTemp}>
@@ -170,15 +148,11 @@ import Locations from '../model/locations';
     </>
   );
 };
-export default DetailScreen;
+export default MoreDetailScreen2;
 const styles = StyleSheet.create({
   tinyLogo: {
     width: 30,
     height: 30,
-  },
-  tinyLogo1: {
-    width: 30,
-    height: 35,
   },
 // ROW 1 
   viewBackAndHome:{

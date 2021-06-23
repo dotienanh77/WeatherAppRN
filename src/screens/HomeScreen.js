@@ -101,6 +101,14 @@ const HomeScreen = ({navigation}) => {
                 source={require('../assets/look.png')}
               />
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('MoreDetailScreen')}>
+              {/* onPress={() => navigate('WeatherApp')}> */}
+              <Image
+                style={styles.tinyLogo1}
+                source={require('../assets/detail.png')}
+              />
+            </TouchableOpacity>
           </View>
           <View style={styles.container}>
             <View style={styles.topInfoWrapper}>
@@ -250,6 +258,10 @@ const styles = StyleSheet.create({
   tinyLogo: {
     width: 30,
     height: 30,
+  },
+  tinyLogo1: {
+    width: 30,
+    height: 35,
   },
   appHeader: {
     flexDirection: 'row',
