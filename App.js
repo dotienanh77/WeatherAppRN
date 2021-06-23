@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import type {Node} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Text, View, Button, TouchableOpacity} from 'react-native';
@@ -18,11 +17,11 @@ const App = () => {
         screenOptions={{
         headerShown: false,
         }}>
-        <Stack.Screen name="HomeScreen" component={HomeScreen}  />
+        {/* <Stack.Screen name="HomeScreen" component={HomeScreen}  />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
-        <Stack.Screen name="DetailScreen" component={DetailScreen} />
+        <Stack.Screen name="DetailScreen" component={DetailScreen} /> */}
         <Stack.Screen name="MoreDetailScreen" component={MoreDetailScreen} />
-        <Stack.Screen name="MoreDetailScreen2" component={MoreDetailScreen2} />
+        {/* <Stack.Screen name="MoreDetailScreen2" component={MoreDetailScreen2} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
