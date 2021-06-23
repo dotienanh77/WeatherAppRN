@@ -11,6 +11,7 @@ import {
   ScrollView,
   StatusBar,
   Image,
+  Platform,
   ImageBackground,
   useWindowDimensions,
   Animated,
@@ -27,7 +28,7 @@ import Locations from '../model/locations';
 
 // const DetailScreen = ({navigation, route}) => {
   const DetailScreen = ({ navigation: { navigate },route })=> {
-  
+
   // const WeatherIcon = weatherMain => {
   //   if (weatherMain === 'Night') {
   //     return <MoonIcon width={34} height={34} fill="#fff" />;
@@ -58,7 +59,7 @@ import Locations from '../model/locations';
         setHumidity(data.main.humidity);
         setSpeed(data.wind.speed);
         setGust(data.wind.gust);
-        setDeg(data.wind.deg); 
+        setDeg(data.wind.deg);
 
       } catch (error) {
         console.log('fail...', error.message);
@@ -79,12 +80,13 @@ import Locations from '../model/locations';
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
   return (
-    <> 
+    <>
       <StatusBar barStyle="light-content" />
       <View style={{width: windowWidth, height: windowHeight}}>
         <ImageBackground
           source={require('../assets/night2.jpg')}
           style={{flex: 1, flexDirection: 'column'}}>
+            <View style = {{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
 {/* ROW 1 */}
           <View style={styles.viewBackAndHome}>
             <TouchableOpacity
@@ -157,6 +159,7 @@ import Locations from '../model/locations';
               <Text style={styles.textWind3}>{gust}</Text>
             </View>
           </View>
+          </View>
         </ImageBackground>
       </View>
     </>
@@ -168,7 +171,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-// ROW 1 
+// ROW 1
   viewBackAndHome:{
     flex: 0.07,
     flexDirection: 'row',
@@ -177,10 +180,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginTop:10,
   },
-// ROW 2   
+// ROW 2
   viewCity:{flex: 0.1, justifyContent: 'center', alignItems: 'center'},
   textCity:{fontSize: 40, color: '#fff', fontWeight: 'bold'},
-// ROW 3 
+// ROW 3
   viewTemp:{flex: 0.15, flexDirection: 'row'},
   viewTemp1:{
     flex: 0.6,
@@ -194,7 +197,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textState:{color: '#fff', fontSize: 25},
-// ROW 4 
+// ROW 4
   viewTemp2: {flex: 0.08, flexDirection: 'row'},
   viewTempMaxMin:{
     flex: 0.5,
@@ -202,7 +205,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textTempMaxMin:{fontSize: 15, color: '#fff', fontWeight: 'bold'},
-// ROW 5 
+// ROW 5
   viewHumidity:{
     flex: 0.1,
     borderBottomWidth: 1,
@@ -224,7 +227,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 10,
   },
-// ROW 6 
+// ROW 6
   viewPressure:{
     flex: 0.1,
     borderBottomWidth: 1,

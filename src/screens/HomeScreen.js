@@ -8,9 +8,11 @@ import {
   StyleSheet,
   Button,
   ScrollView,
+  Platform,
   StatusBar,
   Image,
   ImageBackground,
+  SafeAreaView,
   useWindowDimensions,
   Animated,
   TouchableOpacity,
@@ -86,6 +88,7 @@ const HomeScreen = ({navigation}) => {
         <ImageBackground
           source={require('../assets/night2.jpg')}
           style={{flex: 1}}>
+        <View style = {{flex: 1, marginTop: Platform.OS === 'ios' ? 35: 0}}>
           <View
             style={{
               flex: 0.1,
@@ -178,6 +181,7 @@ const HomeScreen = ({navigation}) => {
                 </View>
               </View>
             </View>
+          </View>
           </View>
         </ImageBackground>
       </View>
