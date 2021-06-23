@@ -67,7 +67,7 @@ const MoreDetailScreen = ({navigation}) => {
       <StatusBar barStyle="light-content" />
       <View style={{width: windowWidth, height: windowHeight}}>
         <ImageBackground
-          source={require('../assets/detailMain.jpg')}
+          source={require('../assets/night2.jpg')}
           style={{flex: 1, flexDirection: 'column'}}>
 {/* ROW 1 */}
           <View style={styles.viewBackAndHome}>
