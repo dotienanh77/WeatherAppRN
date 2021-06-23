@@ -7,19 +7,20 @@ import MenuIcon from '../assets/menu.svg';
 import SearchIcon from '../assets/search.svg';
 
 const SearchScreen = ({ navigation: { navigate } })=> {
-  const image = { uri: "https://tenovi.net/public/upload/images/2018/07/15/153162365428.jpg" }; 
-  const [textVn, setTextVn] = useState("");
+  const image = { uri: 'https://tenovi.net/public/upload/images/2018/07/15/153162365428.jpg' };
+  const [textVn, setTextVn] = useState('');
   ////
   const SearchButton = (textVn) => {
     if (textVn.length <= 0 ) {
       alert('Please Enter Information!');
       return;
-    }else{
+    } else {
       return navigate('DetailScreen', {textVn:[textVn]});
     }
   };
   return (
        <ImageBackground source={image} style={styles.containerImageBackGround}>
+         <View style = {{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
   {/* ROW 1 */}
           <View style = {styles.containerTouchBack}>
             <TouchableOpacity
@@ -32,26 +33,27 @@ const SearchScreen = ({ navigation: { navigate } })=> {
   {/* ROW 2 */}
           <View style={styles.containerTextInput}>
             <View style={{flex:0.8}}>
-              <TextInput 
+              <TextInput
                 onChangeText ={setTextVn}
                 placeholder= "City Enter (Ex:Hanoi...)." style={styles.textInput} />
             </View>
             <View style={{flex:0.2}}>
-              <TouchableOpacity           
-                  onPress={() => SearchButton(textVn)}            
+              <TouchableOpacity
+                  onPress={() => SearchButton(textVn)}
                   style={styles.TouchSearch}>
                   <Image
                   style={styles.tinyLogo}
-                  source={require('../assets/look.png')}/>  
+                  source={require('../assets/look.png')}/>
                 </TouchableOpacity>
             </View>
+          </View>
           </View>
         </ImageBackground>
   );
 };
 export default SearchScreen;
 const styles = StyleSheet.create({
-  containerImageBackGround : {flex: 1, resizeMode: "cover"},
+  containerImageBackGround : {flex: 1, resizeMode: 'cover'},
 //// Row 1
   containerTouchBack:{flex:0.1,flexDirection:'row',marginVertical:10, marginLeft:10},
   TouchBack: {
