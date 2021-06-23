@@ -1,22 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef, useEffect, useState} from 'react';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  Button,
-  ScrollView,
   StatusBar,
   Image,
   Platform,
   ImageBackground,
   useWindowDimensions,
-  Animated,
   TouchableOpacity,
-  SafeAreaView,
 } from 'react-native';
 import SunIcon from '../assets/sun.svg';
 import CloudIcon from '../assets/cloudy.svg';
@@ -27,10 +22,10 @@ import SearchIcon from '../assets/search.svg';
 import Locations from '../model/locations';
 
   const DetailScreen = ({ navigation: { navigate },route })=> {
-
   const cityName = route.params.textVn[0];
   const [text, setText] = useState("");
   const [textRemind, setTextRemind] = useState("");
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -47,7 +42,6 @@ import Locations from '../model/locations';
         setSpeed(data.wind.speed);
         setGust(data.wind.gust);
         setDeg(data.wind.deg);
-
         setText(cityName);
   
         if ((data.weather[0].main) === 'Rain'){
@@ -175,7 +169,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 35,
   },
-// ROW 1 
+// ROW 1
   viewBackAndHome:{
     flex: 0.07,
     flexDirection: 'row',

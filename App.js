@@ -6,7 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Text, View, Button, TouchableOpacity} from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import DetailScreen from './src/screens/DetailScreen';
-import MoreDetailScreen from './src/screens/MoreDetailScreen';
+import DetailMainScreen from './src/screens/DetailMainScreen';
 import MoreDetailScreen2 from './src/screens/MoreDetailScreen2';
 import SearchScreen from './src/screens/SearchScreen';
 const Stack = createStackNavigator();
@@ -17,11 +17,11 @@ const App = () => {
         screenOptions={{
         headerShown: false,
         }}>
-        {/* <Stack.Screen name="HomeScreen" component={HomeScreen}  />
+        <Stack.Screen name="HomeScreen" component={HomeScreen}  />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
-        <Stack.Screen name="DetailScreen" component={DetailScreen} /> */}
-        <Stack.Screen name="MoreDetailScreen" component={MoreDetailScreen} />
-        {/* <Stack.Screen name="MoreDetailScreen2" component={MoreDetailScreen2} /> */}
+        <Stack.Screen name="DetailScreen" component={DetailScreen} />
+        <Stack.Screen name="DetailMainScreen" component={DetailMainScreen} />
+        <Stack.Screen name="MoreDetailScreen2" component={MoreDetailScreen2} />
       </Stack.Navigator>
     </NavigationContainer>
   );

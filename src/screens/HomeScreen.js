@@ -1,20 +1,15 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {
   View,
   Text,
   StyleSheet,
-  Button,
-  ScrollView,
   Platform,
   StatusBar,
   Image,
   ImageBackground,
-  SafeAreaView,
   useWindowDimensions,
-  Animated,
   TouchableOpacity,
 } from 'react-native';
 import SunIcon from '../assets/sun.svg';
@@ -26,9 +21,7 @@ import SearchIcon from '../assets/search.svg';
 
 import Locations from '../model/locations';
 
-
 const HomeScreen = ({navigation}) => {
-
   const WeatherIcon = weatherMain => {
     if (weatherMain === 'Night') {
       return <MoonIcon width={34} height={34} fill="#fff" />;
@@ -42,7 +35,7 @@ const HomeScreen = ({navigation}) => {
     if (weatherMain === 'Rainy') {
       return <RainIcon width={34} height={34} fill="#fff" />;
     }
-};
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -52,14 +45,12 @@ const HomeScreen = ({navigation}) => {
         const response = await fetch(requestUrl);
         const responseJSON = await response.json();
         const data = responseJSON;
-
         let date = new Date().getDate();
         let month = new Date().getMonth() + 1;
         let year = new Date().getFullYear();
         setDateTime(date);
         setMonthTime(month);
         setYearTime(year);
-
         setTemperature(data.main.temp);
         setPressure(data.main.pressure);
         setHumidity(data.main.humidity);
@@ -88,107 +79,107 @@ const HomeScreen = ({navigation}) => {
         <ImageBackground
           source={require('../assets/night2.jpg')}
           style={{flex: 1}}>
-        <View style = {{flex: 1, marginTop: Platform.OS === 'ios' ? 35: 0}}>
-          <View
-            style={{
-              flex: 0.1,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              paddingHorizontal: 20,
-            }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('SearchScreen')}>
-              <Image
-                style={styles.tinyLogo}
-                source={require('../assets/look.png')}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('MoreDetailScreen')}>
-              <Image
-                style={styles.tinyLogo1}
-                source={require('../assets/detail.png')}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.container}>
-            <View style={styles.topInfoWrapper}>
-              <View>
-                <Text style={styles.city}>Ho Chi Minh</Text>
-                <Text style={styles.time}>
-                  {dateTime} - {monthTime} - {yearTime}
-                </Text>
-              </View>
-              <View>
-                <Text style={styles.temperature}>{`${Math.floor(
-                  temperature / 1,
-                )}\u2103`}</Text>
-                <View style={{flexDirection: 'row'}}>
-                  {WeatherIcon({weatherMain})}
-                  <Text style={styles.textWeather}>{weatherMain}</Text>
-                </View>
-              </View>
-            </View>
+          <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
             <View
               style={{
-                borderBottomColor: 'rgba(255,255,255,0.7)',
-                marginTop: 20,
-                borderBottomWidth: 1,
-              }}
-            />
-            <View style={styles.bottomInfoWrapper}>
-              <View style={{alignItems: 'center'}}>
-                <Text style={styles.infoText}>Wind</Text>
-                <Text style={[styles.infoText, {fontSize: 24}]}>{wind}</Text>
-                <Text style={styles.infoText}>m/s</Text>
-                <View style={styles.infoBar}>
-                  <View
-                    style={{
-                      width: 5,
-                      height: 5,
-                      backgroundColor: '#69F0AE',
-                      borderRadius: 5,
-                    }}
-                  />
+                flex: 0.1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingHorizontal: 20,
+              }}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('SearchScreen')}>
+                <Image
+                  style={styles.tinyLogo}
+                  source={require('../assets/look.png')}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('DetailMainScreen')}>
+                <Image
+                  style={styles.tinyLogo1}
+                  source={require('../assets/detail.png')}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.container}>
+              <View style={styles.topInfoWrapper}>
+                <View>
+                  <Text style={styles.city}>Ho Chi Minh</Text>
+                  <Text style={styles.time}>
+                    {dateTime} - {monthTime} - {yearTime}
+                  </Text>
+                </View>
+                <View>
+                  <Text style={styles.temperature}>{`${Math.floor(
+                    temperature / 1,
+                  )}\u2103`}</Text>
+                  <View style={{flexDirection: 'row'}}>
+                    {WeatherIcon({weatherMain})}
+                    <Text style={styles.textWeather}>{weatherMain}</Text>
+                  </View>
                 </View>
               </View>
-              <View style={{alignItems: 'center'}}>
-                <Text style={styles.infoText}>Pressure</Text>
-                <Text style={[styles.infoText, {fontSize: 24}]}>
-                  {pressure}
-                </Text>
-                <Text style={styles.infoText}>Bar</Text>
-                <View style={styles.infoBar}>
-                  <View
-                    style={{
-                      width: 5,
-                      height: 5,
-                      backgroundColor: '#F44336',
-                      borderRadius: 5,
-                    }}
-                  />
+              <View
+                style={{
+                  borderBottomColor: 'rgba(255,255,255,0.7)',
+                  marginTop: 20,
+                  borderBottomWidth: 1,
+                }}
+              />
+              <View style={styles.bottomInfoWrapper}>
+                <View style={{alignItems: 'center'}}>
+                  <Text style={styles.infoText}>Wind</Text>
+                  <Text style={[styles.infoText, {fontSize: 24}]}>{wind}</Text>
+                  <Text style={styles.infoText}>m/s</Text>
+                  <View style={styles.infoBar}>
+                    <View
+                      style={{
+                        width: 5,
+                        height: 5,
+                        backgroundColor: '#69F0AE',
+                        borderRadius: 5,
+                      }}
+                    />
+                  </View>
                 </View>
-              </View>
-              <View style={{alignItems: 'center'}}>
-                <Text style={styles.infoText}>Humidity</Text>
-                <Text style={[styles.infoText, {fontSize: 24}]}>
-                  {humidity}
-                </Text>
-                <Text style={styles.infoText}>%</Text>
-                <View style={styles.infoBar}>
-                  <View
-                    style={{
-                      width: 5,
-                      height: 5,
-                      backgroundColor: '#F44336',
-                      borderRadius: 5,
-                    }}
-                  />
+                <View style={{alignItems: 'center'}}>
+                  <Text style={styles.infoText}>Pressure</Text>
+                  <Text style={[styles.infoText, {fontSize: 24}]}>
+                    {pressure}
+                  </Text>
+                  <Text style={styles.infoText}>Bar</Text>
+                  <View style={styles.infoBar}>
+                    <View
+                      style={{
+                        width: 5,
+                        height: 5,
+                        backgroundColor: '#F44336',
+                        borderRadius: 5,
+                      }}
+                    />
+                  </View>
+                </View>
+                <View style={{alignItems: 'center'}}>
+                  <Text style={styles.infoText}>Humidity</Text>
+                  <Text style={[styles.infoText, {fontSize: 24}]}>
+                    {humidity}
+                  </Text>
+                  <Text style={styles.infoText}>%</Text>
+                  <View style={styles.infoBar}>
+                    <View
+                      style={{
+                        width: 5,
+                        height: 5,
+                        backgroundColor: '#F44336',
+                        borderRadius: 5,
+                      }}
+                    />
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
           </View>
         </ImageBackground>
       </View>

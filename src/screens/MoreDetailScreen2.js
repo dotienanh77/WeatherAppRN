@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Button,
   ScrollView,
+  Platform,
   StatusBar,
   Image,
   ImageBackground,
@@ -26,7 +27,6 @@ import SearchIcon from '../assets/search.svg';
 import Locations from '../model/locations';
 
 const MoreDetailScreen2 = ({navigation, route}) => {
-
   const cityName = route.params.text[0];
   useEffect(() => {
     async function fetchData() {
@@ -70,6 +70,7 @@ const MoreDetailScreen2 = ({navigation, route}) => {
         <ImageBackground
           source={require('../assets/night2.jpg')}
           style={{flex: 1, flexDirection: 'column'}}>
+            <View style = {{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
 {/* ROW 1 */}
           <View style={styles.viewBackAndHome}>
             <TouchableOpacity
@@ -137,6 +138,7 @@ const MoreDetailScreen2 = ({navigation, route}) => {
               <Text style={styles.textWind2}>Gust (km/h)</Text>
               <Text style={styles.textWind3}>{gust}</Text>
             </View>
+          </View>
           </View>
         </ImageBackground>
       </View>

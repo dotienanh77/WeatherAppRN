@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';

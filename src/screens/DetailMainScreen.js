@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Button,
   ScrollView,
+  Platform,
   StatusBar,
   Image,
   ImageBackground,
@@ -25,60 +26,50 @@ import MenuIcon from '../assets/menu.svg';
 import SearchIcon from '../assets/search.svg';
 import Locations from '../model/locations';
 
-const MoreDetailScreen = ({navigation}) => {
-    useEffect(() => {
+const DetailMainScreen = ({navigation}) => {
+  useEffect(() => {
     async function fetchData() {
       try {
-        const requestUrl = 'https://pro.openweathermap.org/data/2.5/forecast/daily?q=Saigon&cnt=7&appid=e6da80eb2a72709285a540c26f7feb2e&units=metric';
+        const requestUrl = 'https://pro.openweathermap.org/data/2.5/forecast/daily?q=Saigon&cnt=7&appid=e6da80eb2a72709285a540c26f7feb2e';
         const response = await fetch(requestUrl);
         const responseJSON = await response.json();
         const data = responseJSON;
-        setCity(data.city.name);
-        // setTemp(data.main.temp);
         // setTempMax(data.main.temp_max);
         // setTempMin(data.main.temp_min);
-        // setWeatherMain(data.weather[0].main);
-        // setPressure(data.main.pressure);
-        // setHumidity(data.main.humidity);
-        // setSpeed(data.wind.speed);
-        // setGust(data.wind.gust);
-        // setDeg(data.wind.deg); 
-        // console.log(data);
+        setTextCity(data.city.name);
       } catch (error) {
         console.log('fail...', error.message);
       }
     }
     fetchData();
   }, []);
-  // const [city, setCity] = useState('');
-  const [city, setCity] = useState('');
 
   const [temp, setTemp] = useState(0);
   const [tempMax, setTempMax] = useState(0);
   const [tempMin, setTempMin] = useState(0);
-
-
+  const [textCity, setTextCity] = useState('');
+  console.log(textCity);
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
   return (
     <> 
       <StatusBar barStyle="light-content" />
       <View style={{width: windowWidth, height: windowHeight}}>
         <ImageBackground
-          source={require('../assets/detailHomeBackground.jpg')}
+          source={require('../assets/detailMainBackground.jpg')}
           style={{flex: 1, flexDirection: 'column'}}>
+            <View style = {{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
 {/* ROW 1 */}
           <View style={styles.viewBackAndHome}>
             <TouchableOpacity
               onPress={() => navigation.navigate('HomeScreen')}>
               <Image
                 style={styles.tinyLogo}
-                source={require('../assets/back.png')}
-              />
+                source={require('../assets/back.png')}/>
             </TouchableOpacity>
           </View>
 {/* ROW 2 CITY NAME*/}
           <View style={styles.viewCity}>
-            <Text style={styles.textCity}>{city}</Text>
+            <Text style={styles.textCity}>{textCity}</Text>
           </View>
 {/* ROW 4 MAX AND MIN TEMPERATURE*/}
           <View style={styles.viewTemp2}>
@@ -91,12 +82,13 @@ const MoreDetailScreen = ({navigation}) => {
                 Temp_Min: {`${Math.floor(tempMin / 1)}\u2103`}</Text>
             </View>
           </View>
+        </View>
         </ImageBackground>
       </View>
     </>
   );
 };
-export default MoreDetailScreen;
+export default DetailMainScreen;
 const styles = StyleSheet.create({
   tinyLogo: {
     width: 30,
@@ -112,7 +104,7 @@ const styles = StyleSheet.create({
     marginTop:10,
   },
 // ROW 2   
-  viewCity:{flex: 0.08, justifyContent: 'center', alignItems: 'center',backgroundColor:'green'},
+  viewCity:{flex: 0.1, justifyContent: 'center', alignItems: 'center',backgroundColor:'green'},
   textCity:{fontSize: 30, color: '#fff', fontWeight: 'bold'},
 // ROW 4 
   viewTemp2: {flex: 0.08, flexDirection: 'row'},
