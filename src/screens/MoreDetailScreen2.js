@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Button,
   ScrollView,
+  Platform,
   StatusBar,
   Image,
   ImageBackground,
@@ -71,6 +72,7 @@ const MoreDetailScreen2 = ({navigation, route}) => {
         <ImageBackground
           source={require('../assets/night2.jpg')}
           style={{flex: 1, flexDirection: 'column'}}>
+            <View style = {{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
 {/* ROW 1 */}
           <View style={styles.viewBackAndHome}>
             <TouchableOpacity
@@ -142,6 +144,7 @@ const MoreDetailScreen2 = ({navigation, route}) => {
               <Text style={styles.textWind2}>Gust (km/h)</Text>
               <Text style={styles.textWind3}>{gust}</Text>
             </View>
+          </View>
           </View>
         </ImageBackground>
       </View>
