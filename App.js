@@ -17,7 +17,7 @@ const App = () => {
         screenOptions={{
         headerShown: false,
         }}>
-        <Stack.Screen name="HomeScreen" component={HomeScreen}  />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
         <Stack.Screen name="DetailScreen" component={DetailScreen} />
         <Stack.Screen name="DetailMainScreen" component={DetailMainScreen} />

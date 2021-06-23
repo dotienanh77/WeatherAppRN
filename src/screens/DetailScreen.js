@@ -42,6 +42,7 @@ import Locations from '../model/locations';
         setSpeed(data.wind.speed);
         setGust(data.wind.gust);
         setDeg(data.wind.deg);
+        
         setText(cityName);
   
         if ((data.weather[0].main) === 'Rain'){
@@ -79,7 +80,7 @@ import Locations from '../model/locations';
       <StatusBar barStyle="light-content" />
       <View style={{width: windowWidth, height: windowHeight}}>
         <ImageBackground
-          source={require('../assets/night2.jpg')}
+          source={require('../assets/detailScreenBackground.jpg')}
           style={{flex: 1, flexDirection: 'column'}}>
             <View style = {{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
 {/* ROW 1 */}

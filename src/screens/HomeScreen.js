@@ -62,7 +62,6 @@ const HomeScreen = ({navigation}) => {
     }
     fetchData();
   }, []);
-
   const [temperature, setTemperature] = useState(0);
   const [dateTime, setDateTime] = useState(0);
   const [monthTime, setMonthTime] = useState(0);
@@ -77,7 +76,7 @@ const HomeScreen = ({navigation}) => {
       <StatusBar barStyle="light-content" />
       <View style={{width: windowWidth, height: windowHeight}}>
         <ImageBackground
-          source={require('../assets/night2.jpg')}
+          source={require('../assets/HomeBackground.jpg')}
           style={{flex: 1}}>
           <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
             <View

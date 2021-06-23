@@ -7,16 +7,15 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   ScrollView,
   Platform,
   StatusBar,
   Image,
   ImageBackground,
   useWindowDimensions,
-  Animated,
   TouchableOpacity,
   SafeAreaView,
+  FlatList
 } from 'react-native';
 import SunIcon from '../assets/sun.svg';
 import CloudIcon from '../assets/cloudy.svg';
@@ -27,29 +26,34 @@ import SearchIcon from '../assets/search.svg';
 import Locations from '../model/locations';
 
 const DetailMainScreen = ({navigation}) => {
+  const [textCity, setTextCity] = useState('');
+  const [dataSource, setDataSource] = useState('');
+  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
   useEffect(() => {
     async function fetchData() {
       try {
-        const requestUrl = 'https://pro.openweathermap.org/data/2.5/forecast/daily?q=Saigon&cnt=7&appid=e6da80eb2a72709285a540c26f7feb2e';
+        const requestUrl = 'https://pro.openweathermap.org/data/2.5/forecast/daily?q=Saigon&cnt=7&appid=e6da80eb2a72709285a540c26f7feb2e&units=metric';
         const response = await fetch(requestUrl);
         const responseJSON = await response.json();
         const data = responseJSON;
-        // setTempMax(data.main.temp_max);
-        // setTempMin(data.main.temp_min);
         setTextCity(data.city.name);
+        setDataSource(data.list);
       } catch (error) {
         console.log('fail...', error.message);
       }
     }
     fetchData();
   }, []);
-
-  const [temp, setTemp] = useState(0);
-  const [tempMax, setTempMax] = useState(0);
-  const [tempMin, setTempMin] = useState(0);
-  const [textCity, setTextCity] = useState('');
-  console.log(textCity);
-  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
+  const renderItem =({item})=>{
+    return (
+          <View style={styles.viewFlatList}>
+            <Text style={styles.textTempMaxMin}>Date</Text>
+            <Text style={styles.textTempMaxMin}>{item.weather[0].main}</Text>
+            <Text style={styles.textTempMaxMin}>{`${Math.floor(item.temp.max / 1)}\u2103`}</Text>
+            <Text style={styles.textTempMaxMin}>{`${Math.floor(item.temp.min / 1)}\u2103`}</Text>
+          </View>
+    )
+  }
   return (
     <> 
       <StatusBar barStyle="light-content" />
@@ -71,16 +75,20 @@ const DetailMainScreen = ({navigation}) => {
           <View style={styles.viewCity}>
             <Text style={styles.textCity}>{textCity}</Text>
           </View>
-{/* ROW 4 MAX AND MIN TEMPERATURE*/}
-          <View style={styles.viewTemp2}>
-            <View style={styles.viewTempMaxMin}>
-              <Text style={styles.textTempMaxMin}>
-                Temp_Max: {`${Math.floor(tempMax / 1)}\u2103`}</Text>
+{/* ROW 3 */}
+          <View style={{flex: 0.8}}>
+            <View style={styles.viewTextMaxMin}>
+              <Text style={styles.textMaxMin}>Date</Text>
+              <Text style={styles.textMaxMin}>Weather</Text>
+              <Text style={styles.textMaxMin}>Max</Text>
+              <Text style={styles.textMaxMin}>Min</Text>
             </View>
-            <View style={styles.viewTempMaxMin}>
-              <Text style={styles.textTempMaxMin}>
-                Temp_Min: {`${Math.floor(tempMin / 1)}\u2103`}</Text>
-            </View>
+            <FlatList
+                style={{flex: 0.75}}
+                data={dataSource}
+                renderItem={renderItem}
+                keyExtractor = {item=> `key=${item.dt}`}
+            />
           </View>
         </View>
         </ImageBackground>
@@ -96,7 +104,7 @@ const styles = StyleSheet.create({
   },
 // ROW 1 
   viewBackAndHome:{
-    flex: 0.07,
+    flex: 0.06,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -104,14 +112,23 @@ const styles = StyleSheet.create({
     marginTop:10,
   },
 // ROW 2   
-  viewCity:{flex: 0.1, justifyContent: 'center', alignItems: 'center',backgroundColor:'green'},
+  viewCity:{flex: 0.09, justifyContent: 'center', alignItems: 'center'},
   textCity:{fontSize: 30, color: '#fff', fontWeight: 'bold'},
-// ROW 4 
-  viewTemp2: {flex: 0.08, flexDirection: 'row'},
-  viewTempMaxMin:{
-    flex: 0.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textTempMaxMin:{fontSize: 15, color: '#fff', fontWeight: 'bold'},
+// ROW 3 
+  viewTextMaxMin:{
+    flex:0.1,
+    flexDirection:'row',
+    justifyContent:'space-evenly',
+    alignItems: 'center'},
+  viewFlatList:{ 
+    height:50,
+    flexDirection: 'row',
+    alignItems:'center',
+    justifyContent: 'space-evenly',
+    borderBottomWidth: 1,
+    borderBottomColor: 'gray',
+    marginHorizontal: 4,
+    marginVertical:5},
+  textTempMaxMin:{fontSize: 17, color: '#fff', fontWeight: 'bold'},
+  textMaxMin:{fontSize: 17, color: '#fff', fontWeight: 'bold'},
 });

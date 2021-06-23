@@ -8,7 +8,6 @@ import MenuIcon from '../assets/menu.svg';
 import SearchIcon from '../assets/search.svg';
 
 const SearchScreen = ({ navigation: { navigate } })=> {
-  ////
   const [textVn, setTextVn] = useState('');
   const SearchButton = (textVn) => {
     if (textVn.length <= 0 ) {
@@ -18,7 +17,6 @@ const SearchScreen = ({ navigation: { navigate } })=> {
       return navigate('DetailScreen', {textVn:[textVn]});
     }
   };
-  ////
   return (
        <ImageBackground source={require('../assets/searchBackground.jpg')} style={styles.containerImageBackGround}>
          <View style = {{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
