@@ -16,13 +16,8 @@ import {
 
   const DetailScreen = ({ navigation: { navigate },route })=> {
   const cityName = route.params.textVn[0];
-<<<<<<< HEAD
   const [text, setText] = useState('');
   const [textRemind, setTextRemind] = useState('');
-=======
-  const [text, setText] = useState("");
-  const [textRemind, setTextRemind] = useState("");
->>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   const [temp, setTemp] = useState(0);
   const [tempMax, setTempMax] = useState(0);
   const [tempMin, setTempMin] = useState(0);
@@ -32,11 +27,8 @@ import {
   const [speed, setSpeed] = useState(0);
   const [gust, setGust] = useState(0);
   const [deg, setDeg] = useState(0);
+  const [imageIcon, setIcon] = useState();
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
-<<<<<<< HEAD
-=======
-
->>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   useEffect(() => {
     async function fetchData() {
       try {
@@ -44,7 +36,6 @@ import {
         const response = await fetch(requestUrl);
         const responseJSON = await response.json();
         const data = responseJSON;
-
         setTemp(data.main.temp);
         setTempMax(data.main.temp_max);
         setTempMin(data.main.temp_min);
@@ -58,27 +49,20 @@ import {
 
         if ((data.weather[0].main) === 'Rain'){
           setTextRemind('Note: The weather of the City is Rainy. Bring an umbrella or raincoat when going out.');
-        }
-        else if ((data.weather[0].main) === 'Clouds'){
+          setIcon(require('../assets/rain.png'));
+        }else if ((data.weather[0].main) === 'Clouds'){
           setTextRemind('Note: The weather of the City is Cloud. Have you a good day.');
-        }
-        else if ((data.weather[0].main) === 'Clear'){
+          setIcon(require('../assets/clouds.png'));
+        }else{
           setTextRemind('Note: The weather of the City is Sunny. Please bring a hat or sunscreen when going out.');
-        }
-        else {
-          setTextRemind('');
-        }
+          setIcon(require('../assets/sun.png'));
+        };
       } catch (error) {
         console.log('fail...', error.message);
       }
     }
     fetchData();
   }, []);
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -113,6 +97,9 @@ import {
             </View>
             <View style={styles.viewState}>
               <Text style={styles.textState}>{weatherMain}</Text>
+              <Image
+                  style={styles.tinyLogoWeather}
+                  source={imageIcon}/>
             </View>
           </View>
 {/* ROW 4 MAX AND MIN TEMPERATURE*/}
@@ -174,6 +161,10 @@ const styles = StyleSheet.create({
     width: 30,
     height: 35,
   },
+  tinyLogoWeather: {
+    width: 30,
+    height: 30,
+  },
 // ROW 1
   viewBackAndHome:{
     flex: 0.07,
@@ -196,6 +187,7 @@ const styles = StyleSheet.create({
   textTemp1:{color: '#fff', fontSize: 70},
   viewState:{
     flex: 0.4,
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },

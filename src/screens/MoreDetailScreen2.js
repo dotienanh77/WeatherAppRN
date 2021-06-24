@@ -38,11 +38,9 @@ const MoreDetailScreen2 = ({navigation, route}) => {
     function getIcon(){
       if (item.weather[0].main === 'Clouds'){
         return require('../assets/clouds.png');
-      };
-      if (item.weather[0].main=== 'Rain'){
+      }else if (item.weather[0].main=== 'Rain'){
         return require('../assets/rain.png');
-      };
-      if ((item.weather[0].main) === 'Clear'){
+      }else{
         return require('../assets/sun.png');
       };
     }
