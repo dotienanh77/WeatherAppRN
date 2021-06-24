@@ -17,14 +17,6 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import SunIcon from '../assets/sun.svg';
-import CloudIcon from '../assets/cloudy.svg';
-import MoonIcon from '../assets/moon.svg';
-import RainIcon from '../assets/rain.svg';
-import MenuIcon from '../assets/menu.svg';
-import SearchIcon from '../assets/search.svg';
-import Locations from '../model/locations';
-
 const MoreDetailScreen2 = ({navigation, route}) => {
   const cityName = route.params.text[0];
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();

@@ -13,18 +13,21 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from 'react-native';
-import SunIcon from '../assets/sun.svg';
-import CloudIcon from '../assets/cloudy.svg';
-import MoonIcon from '../assets/moon.svg';
-import RainIcon from '../assets/rain.svg';
-import MenuIcon from '../assets/menu.svg';
-import SearchIcon from '../assets/search.svg';
-import Locations from '../model/locations';
 
   const DetailScreen = ({ navigation: { navigate },route })=> {
   const cityName = route.params.textVn[0];
   const [text, setText] = useState("");
   const [textRemind, setTextRemind] = useState("");
+  const [temp, setTemp] = useState(0);
+  const [tempMax, setTempMax] = useState(0);
+  const [tempMin, setTempMin] = useState(0);
+  const [weatherMain, setWeatherMain] = useState('');
+  const [humidity, setHumidity] = useState(0);
+  const [pressure, setPressure] = useState(0);
+  const [speed, setSpeed] = useState(0);
+  const [gust, setGust] = useState(0);
+  const [deg, setDeg] = useState(0);
+  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
   useEffect(() => {
     async function fetchData() {
@@ -42,7 +45,6 @@ import Locations from '../model/locations';
         setSpeed(data.wind.speed);
         setGust(data.wind.gust);
         setDeg(data.wind.deg);
-        
         setText(cityName);
   
         if ((data.weather[0].main) === 'Rain'){
@@ -64,17 +66,6 @@ import Locations from '../model/locations';
     fetchData();
   }, []);
   
-  const [temp, setTemp] = useState(0);
-  const [tempMax, setTempMax] = useState(0);
-  const [tempMin, setTempMin] = useState(0);
-  const [weatherMain, setWeatherMain] = useState('');
-  const [humidity, setHumidity] = useState(0);
-  const [pressure, setPressure] = useState(0);
-  const [speed, setSpeed] = useState(0);
-  const [gust, setGust] = useState(0);
-  const [deg, setDeg] = useState(0);
-  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
-
   return (
     <>
       <StatusBar barStyle="light-content" />
