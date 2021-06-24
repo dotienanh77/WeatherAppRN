@@ -12,26 +12,7 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from 'react-native';
-import SunIcon from '../assets/sun.svg';
-import CloudIcon from '../assets/cloudy.svg';
-import MoonIcon from '../assets/moon.svg';
-import RainIcon from '../assets/rain.svg';
-
 const HomeScreen = ({navigation}) => {
-  // const WeatherIcon = weatherMain => {
-  //   if (weatherMain === 'Night') {
-  //     return <MoonIcon width={34} height={34} fill="#fff" />;
-  //   }
-  //   if (weatherMain === 'Clouds') {
-  //     return <CloudIcon width={34} height={34} fill="#fff" />;
-  //   }
-  //   if (weatherMain === 'Sunny') {
-  //     return <SunIcon width={34} height={34} fill="#fff" />;
-  //   }
-  //   if (weatherMain === 'Rainy') {
-  //     return <RainIcon width={34} height={34} fill="#fff" />;
-  //   }
-  // };
   const [temperature, setTemperature] = useState(0);
   const [dateTime, setDateTime] = useState(0);
   const [monthTime, setMonthTime] = useState(0);
@@ -39,6 +20,7 @@ const HomeScreen = ({navigation}) => {
   const [wind, setWind] = useState(0);
   const [humidity, setHumidity] = useState(0);
   const [clouds, setClouds] = useState(0);
+  const [imageIcon, setIcon] = useState();
   const [weatherMain, setWeatherMain] = useState('');
   const [cityName, setCityName] = useState('');
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
@@ -63,6 +45,14 @@ const HomeScreen = ({navigation}) => {
         setWind(data.wind.speed);
         setWeatherMain(data.weather[0].main);
         setCityName(data.name);
+
+        if (data.weather[0].main === 'Clouds') {
+          setIcon(require('../assets/clouds.png'));
+        } else if (data.weather[0].main === 'Rain') {
+          setIcon(require('../assets/rain.png'));
+        } else {
+          setIcon(require('../assets/sun.png'));
+        }
       } catch (error) {
         console.log('fail...', error.message);
       }
@@ -107,10 +97,7 @@ const HomeScreen = ({navigation}) => {
                     temperature / 1,
                   )}\u2103`}</Text>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Image
-                      style={styles.tinyLogoWeather}
-                      source={require('../assets/clouds.png')}
-                    />
+                    <Image style={styles.tinyLogoWeather} source={imageIcon} />
                     <Text style={styles.textWeather}>{weatherMain}</Text>
                   </View>
                 </View>
