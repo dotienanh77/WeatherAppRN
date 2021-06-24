@@ -106,8 +106,11 @@ const HomeScreen = ({navigation}) => {
                   <Text style={styles.temperature}>{`${Math.floor(
                     temperature / 1,
                   )}\u2103`}</Text>
-                  <View style={{flexDirection: 'row'}}>
-                    {WeatherIcon({weatherMain})}
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Image
+                      style={styles.tinyLogo}
+                      source={require('../assets/clouds.png')}
+                    />
                     <Text style={styles.textWeather}>{weatherMain}</Text>
                   </View>
                 </View>
@@ -247,8 +250,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   tinyLogo: {
-    width: 30,
-    height: 30,
+    width: 50,
+    height: 50,
   },
   tinyLogo1: {
     width: 30,
