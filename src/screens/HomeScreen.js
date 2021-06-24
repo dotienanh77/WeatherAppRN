@@ -18,7 +18,6 @@ import MoonIcon from '../assets/moon.svg';
 import RainIcon from '../assets/rain.svg';
 import MenuIcon from '../assets/menu.svg';
 import SearchIcon from '../assets/search.svg';
-
 import Locations from '../model/locations';
 
 const HomeScreen = ({navigation}) => {
@@ -79,30 +78,23 @@ const HomeScreen = ({navigation}) => {
           source={require('../assets/HomeBackground.jpg')}
           style={{flex: 1}}>
           <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
-            <View
-              style={{
-                flex: 0.1,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                paddingHorizontal: 20,
-              }}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('SearchScreen')}>
-                <Image
-                  style={styles.tinyLogo}
-                  source={require('../assets/look.png')}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('DetailMainScreen')}>
-                <Image
-                  style={styles.tinyLogo1}
-                  source={require('../assets/detail.png')}
-                />
-              </TouchableOpacity>
-            </View>
             <View style={styles.container}>
+              <View style={styles.topHeaderIcon}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('SearchScreen')}>
+                  <Image
+                    style={styles.tinyLogo}
+                    source={require('../assets/look.png')}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('DetailMainScreen')}>
+                  <Image
+                    style={styles.tinyLogo1}
+                    source={require('../assets/detail.png')}
+                  />
+                </TouchableOpacity>
+              </View>
               <View style={styles.topInfoWrapper}>
                 <View>
                   <Text style={styles.city}>Ho Chi Minh</Text>
@@ -135,7 +127,7 @@ const HomeScreen = ({navigation}) => {
                   <View style={styles.infoBar}>
                     <View
                       style={{
-                        width: 5,
+                        width: wind / 2,
                         height: 5,
                         backgroundColor: '#69F0AE',
                         borderRadius: 5,
@@ -144,7 +136,7 @@ const HomeScreen = ({navigation}) => {
                   </View>
                 </View>
                 <View style={{alignItems: 'center'}}>
-                  <Text style={styles.infoText}>Pressure</Text>
+                  <Text style={styles.infoText}>Clouds</Text>
                   <Text style={[styles.infoText, {fontSize: 24}]}>
                     {pressure}
                   </Text>
@@ -169,7 +161,7 @@ const HomeScreen = ({navigation}) => {
                   <View style={styles.infoBar}>
                     <View
                       style={{
-                        width: 5,
+                        width: humidity / 2,
                         height: 5,
                         backgroundColor: '#F44336',
                         borderRadius: 5,
@@ -189,9 +181,9 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.3)',
     padding: 20,
   },
+
   normalDot: {
     height: 5,
     width: 5,
@@ -211,6 +203,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 160,
     justifyContent: 'space-between',
+  },
+  topHeaderIcon: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
   city: {
     fontSize: 30,

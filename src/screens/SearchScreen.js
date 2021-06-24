@@ -1,11 +1,9 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-alert */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Platform,Image,KeyboardAvoidingView,SafeAreaView,Text, View, TouchableOpacity, StyleSheet, Button,ImageBackground,TextInput,ScrollView} from 'react-native';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
-import MenuIcon from '../assets/menu.svg';
-import SearchIcon from '../assets/search.svg';
+import {Platform,Image, View, TouchableOpacity, StyleSheet,ImageBackground,TextInput} from 'react-native';
 
 const SearchScreen = ({ navigation: { navigate } })=> {
   const [textVn, setTextVn] = useState('');
