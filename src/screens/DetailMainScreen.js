@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef, useEffect, useState} from 'react';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   Platform,
   StatusBar,
   Image,
@@ -17,14 +15,6 @@ import {
   SafeAreaView,
   FlatList
 } from 'react-native';
-import SunIcon from '../assets/sun.svg';
-import CloudIcon from '../assets/cloudy.svg';
-import MoonIcon from '../assets/moon.svg';
-import RainIcon from '../assets/rain.svg';
-import MenuIcon from '../assets/menu.svg';
-import SearchIcon from '../assets/search.svg';
-import Locations from '../model/locations';
-
 const DetailMainScreen = ({navigation}) => {
   const [textCity, setTextCity] = useState('');
   const [dataSource, setDataSource] = useState('');

@@ -16,9 +16,6 @@ import SunIcon from '../assets/sun.svg';
 import CloudIcon from '../assets/cloudy.svg';
 import MoonIcon from '../assets/moon.svg';
 import RainIcon from '../assets/rain.svg';
-import MenuIcon from '../assets/menu.svg';
-import SearchIcon from '../assets/search.svg';
-import Locations from '../model/locations';
 
 const HomeScreen = ({navigation}) => {
   const WeatherIcon = weatherMain => {
@@ -35,6 +32,15 @@ const HomeScreen = ({navigation}) => {
       return <RainIcon width={34} height={34} fill="#fff" />;
     }
   };
+  const [temperature, setTemperature] = useState(0);
+  const [dateTime, setDateTime] = useState(0);
+  const [monthTime, setMonthTime] = useState(0);
+  const [yearTime, setYearTime] = useState(0);
+  const [wind, setWind] = useState(0);
+  const [humidity, setHumidity] = useState(0);
+  const [pressure, setPressure] = useState(0);
+  const [weatherMain, setWeatherMain] = useState('');
+  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
   useEffect(() => {
     async function fetchData() {
@@ -61,15 +67,7 @@ const HomeScreen = ({navigation}) => {
     }
     fetchData();
   }, []);
-  const [temperature, setTemperature] = useState(0);
-  const [dateTime, setDateTime] = useState(0);
-  const [monthTime, setMonthTime] = useState(0);
-  const [yearTime, setYearTime] = useState(0);
-  const [wind, setWind] = useState(0);
-  const [humidity, setHumidity] = useState(0);
-  const [pressure, setPressure] = useState(0);
-  const [weatherMain, setWeatherMain] = useState('');
-  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
+
   return (
     <>
       <StatusBar barStyle="light-content" />

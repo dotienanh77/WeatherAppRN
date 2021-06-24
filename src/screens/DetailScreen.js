@@ -13,18 +13,16 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from 'react-native';
-import SunIcon from '../assets/sun.svg';
-import CloudIcon from '../assets/cloudy.svg';
-import MoonIcon from '../assets/moon.svg';
-import RainIcon from '../assets/rain.svg';
-import MenuIcon from '../assets/menu.svg';
-import SearchIcon from '../assets/search.svg';
-import Locations from '../model/locations';
 
   const DetailScreen = ({ navigation: { navigate },route })=> {
   const cityName = route.params.textVn[0];
+<<<<<<< HEAD
   const [text, setText] = useState('');
   const [textRemind, setTextRemind] = useState('');
+=======
+  const [text, setText] = useState("");
+  const [textRemind, setTextRemind] = useState("");
+>>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   const [temp, setTemp] = useState(0);
   const [tempMax, setTempMax] = useState(0);
   const [tempMin, setTempMin] = useState(0);
@@ -35,6 +33,10 @@ import Locations from '../model/locations';
   const [gust, setGust] = useState(0);
   const [deg, setDeg] = useState(0);
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   useEffect(() => {
     async function fetchData() {
       try {
@@ -72,7 +74,11 @@ import Locations from '../model/locations';
     }
     fetchData();
   }, []);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   return (
     <>
       <StatusBar barStyle="light-content" />
