@@ -39,6 +39,7 @@ const HomeScreen = ({navigation}) => {
   const [wind, setWind] = useState(0);
   const [humidity, setHumidity] = useState(0);
   const [pressure, setPressure] = useState(0);
+  const [imageIcon, setIcon] = useState();
   const [weatherMain, setWeatherMain] = useState('');
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
@@ -61,6 +62,16 @@ const HomeScreen = ({navigation}) => {
         setHumidity(data.main.humidity);
         setWind(data.wind.speed);
         setWeatherMain(data.weather[0].main);
+
+        if ((data.weather[0].main) === 'Clouds'){
+          setIcon(require('../assets/clouds.png'));
+        }
+        if ((data.weather[0].main) === 'Rain'){
+          setIcon(require('../assets/rain.png'));
+        }
+        if ((data.weather[0].main) === 'Clear'){
+          setIcon(require('../assets/sun.png'));
+        }
       } catch (error) {
         console.log('fail...', error.message);
       }
@@ -107,7 +118,7 @@ const HomeScreen = ({navigation}) => {
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <Image
                       style={styles.tinyLogoWeather}
-                      source={require('../assets/clouds.png')}
+                      source={imageIcon}
                     />
                     <Text style={styles.textWeather}>{weatherMain}</Text>
                   </View>

@@ -35,10 +35,23 @@ const DetailMainScreen = ({navigation}) => {
     fetchData();
   }, []);
   const renderItem =({item})=>{
-    return (
+    function getIcon(){
+      if (item.weather[0].main === 'Clouds'){
+        return require('../assets/clouds.png');
+      };
+      if (item.weather[0].main=== 'Rain'){
+        return require('../assets/rain.png');
+      };
+      if ((item.weather[0].main) === 'Clear'){
+        return require('../assets/sun.png');
+      };
+    }
+    return (   
           <View style={styles.viewFlatList}>
             <Text style={styles.textTempMaxMin}>Date</Text>
-            <Text style={styles.textTempMaxMin}>{item.weather[0].main}</Text>
+            <Image
+                style={styles.tinyLogoWeather}
+                source={getIcon()}/>
             <Text style={styles.textTempMaxMin}>{`${Math.floor(item.temp.max / 1)}\u2103`}</Text>
             <Text style={styles.textTempMaxMin}>{`${Math.floor(item.temp.min / 1)}\u2103`}</Text>
           </View>
@@ -121,4 +134,8 @@ const styles = StyleSheet.create({
     marginVertical:5},
   textTempMaxMin:{fontSize: 17, color: '#fff', fontWeight: 'bold'},
   textMaxMin:{fontSize: 17, color: '#fff', fontWeight: 'bold'},
+  tinyLogoWeather: {
+    width: 30,
+    height: 30,
+  },
 });
