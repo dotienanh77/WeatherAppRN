@@ -35,6 +35,21 @@ const MoreDetailScreen2 = ({navigation, route}) => {
   }, []);
 
   const renderItem =({item})=>{
+    function getCurrentDay(){
+      const dataDateMonth = new Date((item.dt)*1000);
+      const date = dataDateMonth.getDate();
+      return date;
+    };
+    function getCurrentMonth(){
+      const dataDateMonth = new Date((item.dt)*1000);
+      const month =dataDateMonth.getMonth()+1;
+      return month;
+    };
+    function getCurrentYear(){
+      const dataDateMonth = new Date((item.dt)*1000);
+      const year =dataDateMonth.getFullYear();
+      return year;
+    };
     function getIcon(){
       if (item.weather[0].main === 'Clouds'){
         return require('../assets/clouds.png');
@@ -46,7 +61,7 @@ const MoreDetailScreen2 = ({navigation, route}) => {
     }
     return (   
           <View style={styles.viewFlatList}>
-            <Text style={styles.textTempMaxMin}>Date</Text>
+            <Text style={styles.textTempMaxMin}>{getCurrentDay()}/{getCurrentMonth()}/{getCurrentYear()}</Text>
             <Image
                 style={styles.tinyLogoWeather}
                 source={getIcon()}/>
