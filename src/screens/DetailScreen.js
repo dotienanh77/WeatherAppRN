@@ -23,47 +23,8 @@ import Locations from '../model/locations';
 
   const DetailScreen = ({ navigation: { navigate },route })=> {
   const cityName = route.params.textVn[0];
-  const [text, setText] = useState("");
-  const [textRemind, setTextRemind] = useState("");
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=e6da80eb2a72709285a540c26f7feb2e&units=metric`;
-        const response = await fetch(requestUrl);
-        const responseJSON = await response.json();
-        const data = responseJSON;
-        setTemp(data.main.temp);
-        setTempMax(data.main.temp_max);
-        setTempMin(data.main.temp_min);
-        setWeatherMain(data.weather[0].main);
-        setPressure(data.main.pressure);
-        setHumidity(data.main.humidity);
-        setSpeed(data.wind.speed);
-        setGust(data.wind.gust);
-        setDeg(data.wind.deg);
-        
-        setText(cityName);
-  
-        if ((data.weather[0].main) === 'Rain'){
-          setTextRemind('Note: The weather of the City is Rainy. Bring an umbrella or raincoat when going out.');
-        }
-        else if ((data.weather[0].main) === 'Clouds'){
-          setTextRemind('Note: The weather of the City is Cloud. Have you a good day.');
-        }
-        else if ((data.weather[0].main) === 'Clear'){
-          setTextRemind('Note: The weather of the City is Sunny. Please bring a hat or sunscreen when going out.');
-        }
-        else{
-          setTextRemind('')
-        }
-      } catch (error) {
-        console.log('fail...', error.message);
-      }
-    }
-    fetchData();
-  }, []);
-  
+  const [text, setText] = useState('');
+  const [textRemind, setTextRemind] = useState('');
   const [temp, setTemp] = useState(0);
   const [tempMax, setTempMax] = useState(0);
   const [tempMin, setTempMin] = useState(0);
@@ -74,6 +35,43 @@ import Locations from '../model/locations';
   const [gust, setGust] = useState(0);
   const [deg, setDeg] = useState(0);
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=e6da80eb2a72709285a540c26f7feb2e&units=metric`;
+        const response = await fetch(requestUrl);
+        const responseJSON = await response.json();
+        const data = responseJSON;
+
+        setTemp(data.main.temp);
+        setTempMax(data.main.temp_max);
+        setTempMin(data.main.temp_min);
+        setWeatherMain(data.weather[0].main);
+        setPressure(data.main.pressure);
+        setHumidity(data.main.humidity);
+        setSpeed(data.wind.speed);
+        setGust(data.wind.gust);
+        setDeg(data.wind.deg);
+        setText(cityName);
+
+        if ((data.weather[0].main) === 'Rain'){
+          setTextRemind('Note: The weather of the City is Rainy. Bring an umbrella or raincoat when going out.');
+        }
+        else if ((data.weather[0].main) === 'Clouds'){
+          setTextRemind('Note: The weather of the City is Cloud. Have you a good day.');
+        }
+        else if ((data.weather[0].main) === 'Clear'){
+          setTextRemind('Note: The weather of the City is Sunny. Please bring a hat or sunscreen when going out.');
+        }
+        else {
+          setTextRemind('');
+        }
+      } catch (error) {
+        console.log('fail...', error.message);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -86,7 +84,7 @@ import Locations from '../model/locations';
 {/* ROW 1 */}
           <View style={styles.viewBackAndHome}>
             <TouchableOpacity
-               onPress={() => navigate('SearchScreen')}> 
+               onPress={() => navigate('SearchScreen')}>
               <Image
                 style={styles.tinyLogo}
                 source={require('../assets/back.png')}/>
