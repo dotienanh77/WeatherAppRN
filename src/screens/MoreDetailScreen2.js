@@ -13,7 +13,6 @@ import {
   ImageBackground,
   useWindowDimensions,
   TouchableOpacity,
-  SafeAreaView,
 } from 'react-native';
 const MoreDetailScreen2 = ({navigation, route}) => {
   const cityName = route.params.text[0];

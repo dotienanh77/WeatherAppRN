@@ -61,7 +61,7 @@ const DetailMainScreen = ({navigation}) => {
     }
     return (
           <View style={styles.viewFlatList}>
-            <Text style={styles.textTempMaxMin}>{getCurrentDay()}/{getCurrentMonth()}/{getCurrentYear()} </Text>
+            <Text style={styles.textTempMaxMin}>{getCurrentDay()}/{getCurrentMonth()}/{getCurrentYear()}</Text>
             <Image
                 style={styles.tinyLogoWeather}
                 source={getIcon()}/>
