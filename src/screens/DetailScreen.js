@@ -16,13 +16,8 @@ import {
 
   const DetailScreen = ({ navigation: { navigate },route })=> {
   const cityName = route.params.textVn[0];
-<<<<<<< HEAD
   const [text, setText] = useState('');
   const [textRemind, setTextRemind] = useState('');
-=======
-  const [text, setText] = useState("");
-  const [textRemind, setTextRemind] = useState("");
->>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   const [temp, setTemp] = useState(0);
   const [tempMax, setTempMax] = useState(0);
   const [tempMin, setTempMin] = useState(0);
@@ -33,10 +28,6 @@ import {
   const [gust, setGust] = useState(0);
   const [deg, setDeg] = useState(0);
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
-<<<<<<< HEAD
-=======
-
->>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   useEffect(() => {
     async function fetchData() {
       try {
@@ -74,11 +65,6 @@ import {
     }
     fetchData();
   }, []);
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   return (
     <>
       <StatusBar barStyle="light-content" />

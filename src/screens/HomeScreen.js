@@ -18,28 +18,29 @@ import MoonIcon from '../assets/moon.svg';
 import RainIcon from '../assets/rain.svg';
 
 const HomeScreen = ({navigation}) => {
-  const WeatherIcon = weatherMain => {
-    if (weatherMain === 'Night') {
-      return <MoonIcon width={34} height={34} fill="#fff" />;
-    }
-    if (weatherMain === 'Clouds') {
-      return <CloudIcon width={34} height={34} fill="#fff" />;
-    }
-    if (weatherMain === 'Sunny') {
-      return <SunIcon width={34} height={34} fill="#fff" />;
-    }
-    if (weatherMain === 'Rainy') {
-      return <RainIcon width={34} height={34} fill="#fff" />;
-    }
-  };
+  // const WeatherIcon = weatherMain => {
+  //   if (weatherMain === 'Night') {
+  //     return <MoonIcon width={34} height={34} fill="#fff" />;
+  //   }
+  //   if (weatherMain === 'Clouds') {
+  //     return <CloudIcon width={34} height={34} fill="#fff" />;
+  //   }
+  //   if (weatherMain === 'Sunny') {
+  //     return <SunIcon width={34} height={34} fill="#fff" />;
+  //   }
+  //   if (weatherMain === 'Rainy') {
+  //     return <RainIcon width={34} height={34} fill="#fff" />;
+  //   }
+  // };
   const [temperature, setTemperature] = useState(0);
   const [dateTime, setDateTime] = useState(0);
   const [monthTime, setMonthTime] = useState(0);
   const [yearTime, setYearTime] = useState(0);
   const [wind, setWind] = useState(0);
   const [humidity, setHumidity] = useState(0);
-  const [pressure, setPressure] = useState(0);
+  const [clouds, setClouds] = useState(0);
   const [weatherMain, setWeatherMain] = useState('');
+  const [cityName, setCityName] = useState('');
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
   useEffect(() => {
@@ -57,10 +58,11 @@ const HomeScreen = ({navigation}) => {
         setMonthTime(month);
         setYearTime(year);
         setTemperature(data.main.temp);
-        setPressure(data.main.pressure);
+        setClouds(data.clouds.all);
         setHumidity(data.main.humidity);
         setWind(data.wind.speed);
         setWeatherMain(data.weather[0].main);
+        setCityName(data.name);
       } catch (error) {
         console.log('fail...', error.message);
       }
@@ -95,7 +97,7 @@ const HomeScreen = ({navigation}) => {
               </View>
               <View style={styles.topInfoWrapper}>
                 <View>
-                  <Text style={styles.city}>Ho Chi Minh</Text>
+                  <Text style={styles.city}>{cityName}</Text>
                   <Text style={styles.time}>
                     {dateTime} - {monthTime} - {yearTime}
                   </Text>
@@ -130,7 +132,8 @@ const HomeScreen = ({navigation}) => {
                       style={{
                         width: wind / 2,
                         height: 5,
-                        backgroundColor: '#69F0AE',
+                        // backgroundColor: '#69F0AE',
+                        backgroundColor: '#F44336',
                         borderRadius: 5,
                       }}
                     />
@@ -139,16 +142,16 @@ const HomeScreen = ({navigation}) => {
                 <View style={{alignItems: 'center'}}>
                   <Text style={styles.infoText}>Clouds</Text>
                   <Text style={[styles.infoText, {fontSize: 24}]}>
-                    {pressure}
+                    {clouds}
                   </Text>
-                  <Text style={styles.infoText}>Bar</Text>
+                  <Text style={styles.infoText}>%</Text>
                   <View style={styles.infoBar}>
                     <View
                       style={{
-                        width: 5,
+                        width: clouds / 2,
                         height: 5,
                         backgroundColor: '#F44336',
-                        borderRadius: 5,
+                        // borderRadius: 5,
                       }}
                     />
                   </View>
@@ -244,7 +247,7 @@ const styles = StyleSheet.create({
     width: 45,
     height: 5,
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    borderRadius: 5,
+    // borderRadius: 5,
   },
   tinyLogo: {
     width: 30,
