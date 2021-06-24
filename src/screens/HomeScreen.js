@@ -114,14 +114,14 @@ const HomeScreen = ({navigation}) => {
                 <View style={{alignItems: 'center'}}>
                   <Text style={styles.infoText}>Wind</Text>
                   <Text style={[styles.infoText, {fontSize: 24}]}>{wind}</Text>
-                  <Text style={styles.infoText}>m/s</Text>
+                  <Text style={styles.infoText}>km/h</Text>
                   <View style={styles.infoBar}>
                     <View
                       style={{
                         width: wind / 2,
                         height: 5,
-                        // backgroundColor: '#69F0AE',
-                        backgroundColor: '#F44336',
+                        // backgroundColor: '#F44336',
+                        backgroundColor: '#69F0AE',
                         borderRadius: 5,
                       }}
                     />
@@ -138,7 +138,7 @@ const HomeScreen = ({navigation}) => {
                       style={{
                         width: clouds / 2,
                         height: 5,
-                        backgroundColor: '#F44336',
+                        backgroundColor: '#69F0AE',
                         // borderRadius: 5,
                       }}
                     />
@@ -155,7 +155,7 @@ const HomeScreen = ({navigation}) => {
                       style={{
                         width: humidity / 2,
                         height: 5,
-                        backgroundColor: '#F44336',
+                        backgroundColor: '#69F0AE',
                         borderRadius: 5,
                       }}
                     />
