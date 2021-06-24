@@ -50,7 +50,6 @@ const DetailMainScreen = ({navigation}) => {
     function getCurrentYear(){
       const dataDateMonth = new Date((item.dt)*1000);
       const year =dataDateMonth.getYear() - 100;
-      console.log(year);
       return year;
     };
 
