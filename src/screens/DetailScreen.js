@@ -16,8 +16,13 @@ import {
 
   const DetailScreen = ({ navigation: { navigate },route })=> {
   const cityName = route.params.textVn[0];
+<<<<<<< HEAD
+  const [text, setText] = useState('');
+  const [textRemind, setTextRemind] = useState('');
+=======
   const [text, setText] = useState("");
   const [textRemind, setTextRemind] = useState("");
+>>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   const [temp, setTemp] = useState(0);
   const [tempMax, setTempMax] = useState(0);
   const [tempMin, setTempMin] = useState(0);
@@ -28,7 +33,10 @@ import {
   const [gust, setGust] = useState(0);
   const [deg, setDeg] = useState(0);
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
+<<<<<<< HEAD
+=======
 
+>>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   useEffect(() => {
     async function fetchData() {
       try {
@@ -36,6 +44,7 @@ import {
         const response = await fetch(requestUrl);
         const responseJSON = await response.json();
         const data = responseJSON;
+
         setTemp(data.main.temp);
         setTempMax(data.main.temp_max);
         setTempMin(data.main.temp_min);
@@ -46,7 +55,7 @@ import {
         setGust(data.wind.gust);
         setDeg(data.wind.deg);
         setText(cityName);
-  
+
         if ((data.weather[0].main) === 'Rain'){
           setTextRemind('Note: The weather of the City is Rainy. Bring an umbrella or raincoat when going out.');
         }
@@ -56,8 +65,8 @@ import {
         else if ((data.weather[0].main) === 'Clear'){
           setTextRemind('Note: The weather of the City is Sunny. Please bring a hat or sunscreen when going out.');
         }
-        else{
-          setTextRemind('')
+        else {
+          setTextRemind('');
         }
       } catch (error) {
         console.log('fail...', error.message);
@@ -65,7 +74,11 @@ import {
     }
     fetchData();
   }, []);
+<<<<<<< HEAD
+
+=======
   
+>>>>>>> 65d17bdfd4e60e40195275501e7283ced06690ac
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -77,7 +90,7 @@ import {
 {/* ROW 1 */}
           <View style={styles.viewBackAndHome}>
             <TouchableOpacity
-               onPress={() => navigate('SearchScreen')}> 
+               onPress={() => navigate('SearchScreen')}>
               <Image
                 style={styles.tinyLogo}
                 source={require('../assets/back.png')}/>
