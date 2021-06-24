@@ -34,29 +34,44 @@ const MoreDetailScreen2 = ({navigation, route}) => {
     fetchData();
   }, []);
 
-  const renderItem =({item})=>{
+  const renderItem = ({item})=>{
+    function getCurrentDay(){
+      const dataDateMonth = new Date((item.dt) * 1000);
+      const date = dataDateMonth.getDate();
+      return date;
+    }
+    function getCurrentMonth(){
+      const dataDateMonth = new Date((item.dt) * 1000);
+      const month = dataDateMonth.getMonth() + 1;
+      return month;
+    }
+    function getCurrentYear(){
+      const dataDateMonth = new Date((item.dt) * 1000);
+      const year = dataDateMonth.getYear() - 100;
+      return year;
+    }
     function getIcon(){
       if (item.weather[0].main === 'Clouds'){
         return require('../assets/clouds.png');
-      }else if (item.weather[0].main=== 'Rain'){
+      } else if (item.weather[0].main === 'Rain'){
         return require('../assets/rain.png');
-      }else{
+      } else {
         return require('../assets/sun.png');
-      };
+      }
     }
-    return (   
+    return (
           <View style={styles.viewFlatList}>
-            <Text style={styles.textTempMaxMin}>Date</Text>
+            <Text style={styles.textTempMaxMin}>{getCurrentDay()}/{getCurrentMonth()}/{getCurrentYear()} </Text>
             <Image
                 style={styles.tinyLogoWeather}
                 source={getIcon()}/>
             <Text style={styles.textTempMaxMin}>{`${Math.floor(item.temp.max / 1)}\u2103`}</Text>
             <Text style={styles.textTempMaxMin}>{`${Math.floor(item.temp.min / 1)}\u2103`}</Text>
           </View>
-    )
-  }
+    );
+  };
   return (
-    <> 
+    <>
       <StatusBar barStyle="light-content" />
       <View style={{width: windowWidth, height: windowHeight}}>
         <ImageBackground
@@ -85,10 +100,10 @@ const MoreDetailScreen2 = ({navigation, route}) => {
 {/* ROW 3 */}
           <View style={{flex: 0.8}}>
             <View style={styles.viewTextMaxMin}>
-              <Text style={styles.textMaxMin}>Date</Text>
-              <Text style={styles.textMaxMin}>Weather</Text>
-              <Text style={styles.textMaxMin}>Max</Text>
-              <Text style={styles.textMaxMin}>Min</Text>
+            <Text style={[styles.textMaxMin, {flex: 0.2, paddingLeft: 45}]}>Date</Text>
+              <Text style={[styles.textMaxMin, {flex: 0.25}]}>Weather</Text>
+              <Text style={[styles.textMaxMin, {flex: 0.2}]}>Max</Text>
+              <Text style={[styles.textMaxMin, {flex: 0.22}]}>Min</Text>
             </View>
             <FlatList
                 style={{flex: 0.75}}
@@ -113,7 +128,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-// ROW 1 
+// ROW 1
   viewBackAndHome:{
     flex: 0.06,
     flexDirection: 'row',
@@ -122,16 +137,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginTop:10,
   },
-// ROW 2   
+// ROW 2
   viewCity:{flex: 0.09, justifyContent: 'center', alignItems: 'center'},
   textCity:{fontSize: 30, color: '#fff', fontWeight: 'bold'},
-// ROW 3 
+// ROW 3
   viewTextMaxMin:{
     flex:0.1,
     flexDirection:'row',
     justifyContent:'space-evenly',
     alignItems: 'center'},
-  viewFlatList:{ 
+  viewFlatList:{
     height:50,
     flexDirection: 'row',
     alignItems:'center',
