@@ -29,6 +29,7 @@ import {
   const [deg, setDeg] = useState(0);
   const [imageIcon, setIcon] = useState();
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
+
   useEffect(() => {
     async function fetchData() {
       try {
