@@ -60,6 +60,9 @@ import {
         }else if((data.weather[0].main) === 'Dust'){
           setTextRemind('Note: The weather of the City is Dusty. Please bring a mask when going out.');
           setIcon(require('../assets/dust.png'));
+        }else if((data.weather[0].main) === 'Snow'){
+          setTextRemind('Note: The weather of the City is Snow. Please wear warm clothes when going out.');
+          setIcon(require('../assets/snow.png'));
         }else{
           setTextRemind('Note: The weather of the City is Haze. Have you a good day.');
           setIcon(require('../assets/haze.png'));

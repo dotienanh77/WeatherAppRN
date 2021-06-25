@@ -58,6 +58,8 @@ const MoreDetailScreen2 = ({navigation, route}) => {
         return require('../assets/sun.png');
       } else if(item.weather[0].main === 'Dust'){
         return require('../assets/dust.png');
+      } else if(item.weather[0].main === 'Snow'){
+        return require('../assets/snow.png');
       } else{
         return require('../assets/haze.png');
       };
