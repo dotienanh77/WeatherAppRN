@@ -54,9 +54,15 @@ import {
         }else if ((data.weather[0].main) === 'Clouds'){
           setTextRemind('Note: The weather of the City is Cloud. Have you a good day.');
           setIcon(require('../assets/clouds.png'));
-        }else{
+        }else if((data.weather[0].main) === 'Clear'){
           setTextRemind('Note: The weather of the City is Sunny. Please bring a hat or sunscreen when going out.');
           setIcon(require('../assets/sun.png'));
+        }else if((data.weather[0].main) === 'Dust'){
+          setTextRemind('Note: The weather of the City is Dusty. Please bring a mask when going out.');
+          setIcon(require('../assets/dust.png'));
+        }else{
+          setTextRemind('Note: The weather of the City is Haze. Have you a good day.');
+          setIcon(require('../assets/haze.png'));
         };
       } catch (error) {
         console.log('fail...', error.message);
