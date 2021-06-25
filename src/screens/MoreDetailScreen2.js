@@ -99,10 +99,10 @@ const MoreDetailScreen2 = ({navigation, route}) => {
 {/* ROW 3 */}
           <View style={{flex: 0.8}}>
             <View style={styles.viewTextMaxMin}>
-            <Text style={[styles.textMaxMin, {flex: 0.2, paddingLeft: 45}]}>Date</Text>
+              <Text style={[styles.textMaxMin, {flex: 0.2, paddingLeft: 40}]}>Date</Text>
               <Text style={[styles.textMaxMin, {flex: 0.25}]}>Weather</Text>
-              <Text style={[styles.textMaxMin, {flex: 0.2}]}>Max</Text>
-              <Text style={[styles.textMaxMin, {flex: 0.22}]}>Min</Text>
+              <Text style={[styles.textMaxMin, {flex: 0.2,paddingLeft: 5}]}>Max</Text>
+              <Text style={[styles.textMaxMin, {flex: 0.22,paddingLeft: 5}]}>Min</Text>
             </View>
             <FlatList
                 style={{flex: 0.75}}

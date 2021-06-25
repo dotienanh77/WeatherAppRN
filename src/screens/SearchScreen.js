@@ -37,20 +37,10 @@ const SearchScreen = ({navigation: {navigate}}) => {
           </TouchableOpacity>
         </View>
         {/* ROW 2 */}
-        <View>
-          <Text
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              color: '#fff',
-              fontWeight: 'bold',
-              fontSize: 20,
-              paddingHorizontal: 70,
-            }}>
-            Search other city weather
-          </Text>
+        <View style={styles.containerHeader}>
+          <Text style={styles.textHeader}>Search Other City Weather</Text>
         </View>
+        {/* ROW 3 */}
         <View style={styles.containerTextInput}>
           <View style={{flex: 0.8}}>
             <TextInput
@@ -99,6 +89,13 @@ const styles = StyleSheet.create({
     height: 30,
   },
   //// Row 2
+  containerHeader:{flex:0.1,justifyContent: 'center', alignItems: 'center'},
+  textHeader:{
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  //// Row 3
   containerTextInput: {
     flex: 0.1,
     flexDirection: 'row',
