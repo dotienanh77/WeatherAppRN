@@ -131,7 +131,7 @@ import {
           </View>
           <View style={styles.viewWind2}>
             <View style={styles.viewWind3}>
-              <Text style={styles.textWind2}>Speed (m/s)</Text>
+              <Text style={styles.textWind2}>Speed (km/h)</Text>
               <Text style={styles.textWind3}>{speed}</Text>
             </View>
             <View style={styles.viewWind3}>
