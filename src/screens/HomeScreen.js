@@ -1,4 +1,3 @@
-// import PushNotificationIOS from '@react-native-community/push-notification-ios';
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
@@ -13,11 +12,17 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from 'react-native';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
+
 const HomeScreen = ({navigation}) => {
   const [temperature, setTemperature] = useState(0);
+  // const [hourTime, setHour] = useState(0);
+  // const [minuteTime, setMinute] = useState(0);
   const [dateTime, setDateTime] = useState(0);
   const [monthTime, setMonthTime] = useState(0);
   const [yearTime, setYearTime] = useState(0);
+  const [tempMax, setTempMax] = useState(0);
+  const [tempMin, setTempMin] = useState(0);
   const [wind, setWind] = useState(0);
   const [humidity, setHumidity] = useState(0);
   const [clouds, setClouds] = useState(0);
@@ -37,11 +42,16 @@ const HomeScreen = ({navigation}) => {
         let date = new Date().getDate();
         let month = new Date().getMonth() + 1;
         let year = new Date().getFullYear();
-
+        let hour = new Date().getHours();
+        let minute = new Date().getMinutes();
         setDateTime(date);
         setMonthTime(month);
         setYearTime(year);
+        // setHour(hour);
+        // setMinute(minute);
         setTemperature(data.main.temp);
+        setTempMax(data.main.temp_max);
+        setTempMin(data.main.temp_min);
         setClouds(data.clouds.all);
         setHumidity(data.main.humidity);
         setWind(data.wind.speed);
@@ -52,19 +62,52 @@ const HomeScreen = ({navigation}) => {
           setIcon(require('../assets/clouds.png'));
         } else if (data.weather[0].main === 'Rain') {
           setIcon(require('../assets/rain.png'));
-        } else if(data.weather[0].main === 'Clear') {
+        } else if (data.weather[0].main === 'Clear') {
           setIcon(require('../assets/sun.png'));
-        }else if(data.weather[0].main === 'Dust') {
+        } else if (data.weather[0].main === 'Dust') {
           setIcon(require('../assets/dust.png'));
-        }else {
+        } else {
           setIcon(require('../assets/haze.png'));
-        };
+        }
       } catch (error) {
         console.log('fail...', error.message);
       }
     }
     fetchData();
   }, []);
+  /// push local notification
+  // useEffect(() => {
+  //   PushNotificationIOS.presentLocalNotification({
+  //     alertTitle: 'thông báo hệ thống',
+  //     alertBody: 'thời tiết bây giờ là',
+  //   });
+  // });
+
+  useEffect(() => {
+    PushNotificationIOS.scheduleLocalNotification({
+      // alertTitle: 'thông báo hệ thống',
+      alertBody:
+        'The main weather today is: ' +
+        weatherMain +
+        '\n Temp max: ' +
+        `${Math.floor(tempMax / 1)}\u2103` +
+        ', Temp min: ' +
+        `${Math.floor(tempMin / 1)}\u2103`,
+      fireDate: new Date(Date.now() + 1 * 1000).getTime(),
+    });
+  });
+  // let fireDate = new Date(Date.now() + 5 * 1000).getTime();
+  // let alertTitle = 'Push Notification';
+  //  const TimeAlert = () => {
+  //   if ((hourTime === '08') && (minuteTime ==='00')) {
+  //     PushNotificationIOS.scheduleLocalNotification({
+  //       alertTitle: 'thông báo hệ thống',
+  //       alertBody: 'thời tiết bây giờ là',
+  //       fireDate: new Date(Date.now() + 5 * 1000).getTime(),
+  //     });
+  //     }
+  //   }
+  //  }
 
   return (
     <>
