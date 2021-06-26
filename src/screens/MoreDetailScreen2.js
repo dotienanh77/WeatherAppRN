@@ -54,9 +54,15 @@ const MoreDetailScreen2 = ({navigation, route}) => {
         return require('../assets/clouds.png');
       } else if (item.weather[0].main === 'Rain'){
         return require('../assets/rain.png');
-      } else {
+      } else if(item.weather[0].main === 'Clear'){
         return require('../assets/sun.png');
-      }
+      } else if(item.weather[0].main === 'Dust'){
+        return require('../assets/dust.png');
+      } else if(item.weather[0].main === 'Snow'){
+        return require('../assets/snow.png');
+      } else{
+        return require('../assets/haze.png');
+      };
     }
     return (
           <View style={styles.viewFlatList}>

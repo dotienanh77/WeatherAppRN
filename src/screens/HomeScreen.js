@@ -52,9 +52,13 @@ const HomeScreen = ({navigation}) => {
           setIcon(require('../assets/clouds.png'));
         } else if (data.weather[0].main === 'Rain') {
           setIcon(require('../assets/rain.png'));
-        } else {
+        } else if(data.weather[0].main === 'Clear') {
           setIcon(require('../assets/sun.png'));
-        }
+        }else if(data.weather[0].main === 'Dust') {
+          setIcon(require('../assets/dust.png'));
+        }else {
+          setIcon(require('../assets/haze.png'));
+        };
       } catch (error) {
         console.log('fail...', error.message);
       }
