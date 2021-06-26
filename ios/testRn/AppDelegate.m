@@ -1,7 +1,8 @@
+#import "AppDelegate.h"
+
 #import <UserNotifications/UserNotifications.h>
 #import <RNCPushNotificationIOS.h>
 #import <Firebase.h>
-#import "AppDelegate.h"
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -50,15 +51,14 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
   [RNCPushNotificationIOS didReceiveNotificationResponse:response];
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-  ...
-  // Define UNUserNotificationCenter
-  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-  center.delegate = self;
-
-  return YES;
-}
+//- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+//{
+//  // Define UNUserNotificationCenter
+//  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+//  center.delegate = self;
+//
+//  return YES;
+//}
 
 //Called when a notification is delivered to a foreground app.
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
