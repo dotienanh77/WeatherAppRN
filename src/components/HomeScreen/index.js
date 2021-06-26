@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+// import PushNotificationIOS from '@react-native-community/push-notification-ios';
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {
   View,
   Text,
-  StyleSheet,
   Platform,
   StatusBar,
   Image,
@@ -12,8 +12,8 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from 'react-native';
+import {styles} from './styles';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
-
 const HomeScreen = ({navigation}) => {
   const [temperature, setTemperature] = useState(0);
   // const [hourTime, setHour] = useState(0);
@@ -59,16 +59,28 @@ const HomeScreen = ({navigation}) => {
         setCityName(data.name);
 
         if (data.weather[0].main === 'Clouds') {
-          setIcon(require('../assets/clouds.png'));
+          setIcon(require('../../assets/clouds.png'));
         } else if (data.weather[0].main === 'Rain') {
-          setIcon(require('../assets/rain.png'));
+          setIcon(require('../../assets/rain.png'));
         } else if (data.weather[0].main === 'Clear') {
-          setIcon(require('../assets/sun.png'));
+          setIcon(require('../../assets/sun.png'));
         } else if (data.weather[0].main === 'Dust') {
-          setIcon(require('../assets/dust.png'));
+          setIcon(require('../../assets/dust.png'));
         } else {
-          setIcon(require('../assets/haze.png'));
-        }
+          setIcon(require('../../assets/haze.png'));
+        };
+
+        PushNotificationIOS.scheduleLocalNotification({
+          alertBody:
+            'The main weather today is: ' +
+            weatherMain +
+            '\n Temp max: ' +
+            `${Math.floor(data.main.temp_max / 1)}\u2103` +
+            ', Temp min: ' +
+            `${Math.floor(data.main.temp_min / 1)}\u2103`,
+          fireDate: new Date(Date.now() + 1 * 1000).getTime(),
+        });
+
       } catch (error) {
         console.log('fail...', error.message);
       }
@@ -83,19 +95,19 @@ const HomeScreen = ({navigation}) => {
   //   });
   // });
 
-  useEffect(() => {
-    PushNotificationIOS.scheduleLocalNotification({
-      // alertTitle: 'thông báo hệ thống',
-      alertBody:
-        'The main weather today is: ' +
-        weatherMain +
-        '\n Temp max: ' +
-        `${Math.floor(tempMax / 1)}\u2103` +
-        ', Temp min: ' +
-        `${Math.floor(tempMin / 1)}\u2103`,
-      fireDate: new Date(Date.now() + 1 * 1000).getTime(),
-    });
-  });
+  // useEffect(() => {
+  //   PushNotificationIOS.scheduleLocalNotification({
+  //     // alertTitle: 'thông báo hệ thống',
+  //     alertBody:
+  //       'The main weather today is: ' +
+  //       weatherMain +
+  //       '\n Temp max: ' +
+  //       `${Math.floor(tempMax / 1)}\u2103` +
+  //       ', Temp min: ' +
+  //       `${Math.floor(tempMin / 1)}\u2103`,
+  //     fireDate: new Date(Date.now() + 1 * 1000).getTime(),
+  //   });
+  // },[]);
   // let fireDate = new Date(Date.now() + 5 * 1000).getTime();
   // let alertTitle = 'Push Notification';
   //  const TimeAlert = () => {
@@ -114,7 +126,7 @@ const HomeScreen = ({navigation}) => {
       <StatusBar barStyle="light-content" />
       <View style={{width: windowWidth, height: windowHeight}}>
         <ImageBackground
-          source={require('../assets/HomeBackground.jpg')}
+          source={require('../../assets/HomeBackground.jpg')}
           style={{flex: 1}}>
           <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? 35 : 0}}>
             <View style={styles.container}>
@@ -123,14 +135,14 @@ const HomeScreen = ({navigation}) => {
                   onPress={() => navigation.navigate('SearchScreen')}>
                   <Image
                     style={styles.tinyLogo}
-                    source={require('../assets/look.png')}
+                    source={require('../../assets/look.png')}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => navigation.navigate('DetailMainScreen')}>
                   <Image
                     style={styles.tinyLogo1}
-                    source={require('../assets/detail.png')}
+                    source={require('../../assets/detail.png')}
                   />
                 </TouchableOpacity>
               </View>
@@ -218,93 +230,3 @@ const HomeScreen = ({navigation}) => {
   );
 };
 export default HomeScreen;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-
-  normalDot: {
-    height: 5,
-    width: 5,
-    borderRadius: 5,
-    marginHorizontal: 4,
-    backgroundColor: '#fff',
-  },
-  indicatorWrapper: {
-    flexDirection: 'row',
-    position: 'absolute',
-    top: 160,
-    left: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  topInfoWrapper: {
-    flex: 1,
-    marginTop: 160,
-    justifyContent: 'space-between',
-  },
-  topHeaderIcon: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  city: {
-    fontSize: 30,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  time: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  temperature: {
-    color: '#fff',
-    fontSize: 85,
-  },
-  textWeather: {
-    color: '#fff',
-    fontSize: 25,
-    lineHeight: 34,
-    fontWeight: 'bold',
-    marginLeft: 10,
-  },
-  bottomInfoWrapper: {
-    flexDirection: 'row',
-    marginVertical: 20,
-    justifyContent: 'space-between',
-  },
-  infoText: {
-    fontSize: 14,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  infoBar: {
-    width: 45,
-    height: 5,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    // borderRadius: 5,
-  },
-  tinyLogo: {
-    width: 30,
-    height: 30,
-  },
-  tinyLogoWeather: {
-    width: 50,
-    height: 50,
-  },
-  tinyLogo1: {
-    width: 30,
-    height: 35,
-  },
-  appHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    position: 'absolute',
-    paddingHorizontal: 20,
-    top: 0,
-    width: '100%',
-    height: getStatusBarHeight() + 40,
-  },
-});
