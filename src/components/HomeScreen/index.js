@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
@@ -32,17 +33,12 @@ const HomeScreen = ({navigation}) => {
       try {
         const requestUrl =
           'https://api.openweathermap.org/data/2.5/weather?appid=86183a23377ed034aef7aad102f43d64&units=metric&id=1566083';
-        const requestUrl1 = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${cityName}&appid=e6da80eb2a72709285a540c26f7feb2e&cnt=24&units=metric`;
         const response = await fetch(requestUrl);
-        const response1 = await fetch(requestUrl1);
         const responseJSON = await response.json();
-        const responseJSON1 = await response1.json();
         const data = responseJSON;
-        const data1 = responseJSON1;
         let date = new Date().getDate();
         let month = new Date().getMonth() + 1;
         let year = new Date().getFullYear();
-        setDataSource(data1.list);
         setDateTime(date);
         setMonthTime(month);
         setYearTime(year);
@@ -69,7 +65,23 @@ const HomeScreen = ({navigation}) => {
       }
     }
     fetchData();
-  }, []);
+  },[]);
+
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const requestUrl1 = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${cityName}&appid=e6da80eb2a72709285a540c26f7feb2e&cnt=24&units=metric`;
+        const response1 = await fetch(requestUrl1);
+        const responseJSON1 = await response1.json();
+        const data1 = responseJSON1;
+        setDataSource(data1.list);
+      } catch (error) {
+        console.log('fail...', error.message);
+      }
+    }
+    fetchData();
+  });
   //// flatlist Horizantal
   const renderItem = ({item}) => {
     function getHourly() {
@@ -139,7 +151,6 @@ const HomeScreen = ({navigation}) => {
 
                 <View style={styles.viewContainerFlatList}>
                   <FlatList
-                    style={{flex: 0.15}}
                     data={dataSource}
                     horizontal={true}
                     renderItem={renderItem}
