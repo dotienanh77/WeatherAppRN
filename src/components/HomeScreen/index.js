@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
   Platform,
+  FlatList,
   StatusBar,
   Image,
   ImageBackground,
@@ -11,7 +13,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {styles} from './styles';
-// import PushNotificationIOS from '@react-native-community/push-notification-ios';
 const HomeScreen = ({navigation}) => {
   const [temperature, setTemperature] = useState(0);
   const [dateTime, setDateTime] = useState(0);
@@ -23,6 +24,7 @@ const HomeScreen = ({navigation}) => {
   const [imageIcon, setIcon] = useState();
   const [weatherMain, setWeatherMain] = useState('');
   const [cityName, setCityName] = useState('');
+  const [dataSource, setDataSource] = useState('');
   const {width: windowWidth, height: windowHeight} = useWindowDimensions();
 
   useEffect(() => {
@@ -30,12 +32,17 @@ const HomeScreen = ({navigation}) => {
       try {
         const requestUrl =
           'https://api.openweathermap.org/data/2.5/weather?appid=86183a23377ed034aef7aad102f43d64&units=metric&id=1566083';
+        const requestUrl1 = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${cityName}&appid=e6da80eb2a72709285a540c26f7feb2e&cnt=24&units=metric`;
         const response = await fetch(requestUrl);
+        const response1 = await fetch(requestUrl1);
         const responseJSON = await response.json();
+        const responseJSON1 = await response1.json();
         const data = responseJSON;
+        const data1 = responseJSON1;
         let date = new Date().getDate();
         let month = new Date().getMonth() + 1;
         let year = new Date().getFullYear();
+        setDataSource(data1.list);
         setDateTime(date);
         setMonthTime(month);
         setYearTime(year);
@@ -63,6 +70,40 @@ const HomeScreen = ({navigation}) => {
     }
     fetchData();
   }, []);
+  //// flatlist Horizantal
+  const renderItem = ({item}) => {
+    function getHourly() {
+      const dataHours = new Date(item.dt * 1000);
+      const hour = dataHours.getHours();
+      return hour;
+    }
+    function getIcon() {
+      if (item.weather[0].main === 'Clouds') {
+        return require('../../assets/clouds.png');
+      } else if (item.weather[0].main === 'Rain') {
+        return require('../../assets/rain.png');
+      } else if (item.weather[0].main === 'Clear') {
+        return require('../../assets/sun.png');
+      } else if (item.weather[0].main === 'Dust') {
+        return require('../../assets/dust.png');
+      } else if (item.weather[0].main === 'Snow') {
+        return require('../../assets/snow.png');
+      } else {
+        return require('../../assets/haze.png');
+      }
+    }
+    return (
+      <View style={styles.viewTextTemp}>
+        <Text style={styles.textTemp}>{getHourly()}:00</Text>
+        <Image style={styles.tinyLogoWeather1} source={getIcon()} />
+        <Text style={styles.textTemp}>{`${Math.floor(
+          item.main.temp / 1,
+        )}\u2103`}</Text>
+      </View>
+    );
+  };
+  ///
+
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -95,9 +136,17 @@ const HomeScreen = ({navigation}) => {
                     {dateTime} - {monthTime} - {yearTime}
                   </Text>
                 </View>
-                <View style={{flex: 1, backgroundColor: 'cyan'}}>
-                  <Text>hello world</Text>
+
+                <View style={styles.viewContainerFlatList}>
+                  <FlatList
+                    style={{flex: 0.15}}
+                    data={dataSource}
+                    horizontal={true}
+                    renderItem={renderItem}
+                    keyExtractor={item => `key=${item.dt}`}
+                  />
                 </View>
+
                 <View>
                   <Text style={styles.temperature}>{`${Math.floor(
                     temperature / 1,

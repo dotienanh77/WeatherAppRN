@@ -30,17 +30,12 @@ const App = () => {
     }
     fetchData();
   }, []);
-
-  // useEffect(() => {
-
-  // });
   useEffect(() => {
     function GetRemind() {
       setTimeout(() => {
         setHoursTime(hour);
         setMinutesTime(minute);
         setSecondsTime(second);
-        console.log(second);
       }, 1000);
     }
     GetRemind();
@@ -53,10 +48,10 @@ const App = () => {
         `${Math.floor(tempMax / 1)}\u2103` +
         ', Temp min: ' +
         `${Math.floor(tempMin / 1)}\u2103`,
-      // fireDate: new Date(Date.now() + 1 * 1000).getTime(),
   });}});
 
   return (
+    // eslint-disable-next-line react-native/no-inline-styles
     <View style={{flex: 1}}>
       <Navigator />
     </View>

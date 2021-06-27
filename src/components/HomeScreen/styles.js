@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
     width: 30,
     height: 35,
   },
-  appHeader: {
+    appHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
@@ -91,4 +91,32 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: getStatusBarHeight() + 40,
   },
+    tinyLogoWeather1: {
+    width: 30,
+    height: 30,
+  },
+  viewContainerFlatList:{flex: 0.5,
+    borderTopWidth:1,
+    borderBottomWidth:1,
+    borderTopColor:'gray',
+    borderBottomColor:'gray',
+    paddingTop:5,
+  },
+
+    viewTextTemp:{
+    height:'90%',
+    width: 90,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    marginVertical: 5,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'gray',
+    marginHorizontal: 8},
+
+    textTemp:{
+    fontSize: 15,
+    color: '#fff',
+    fontWeight: 'bold',
+    },
 });

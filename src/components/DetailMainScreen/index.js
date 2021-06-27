@@ -36,7 +36,11 @@ const DetailMainScreen = ({navigation}) => {
     function getCurrentDay(){
       const dataDateMonth = new Date((item.dt) * 1000);
       const date = dataDateMonth.getDate();
+      if (date < 10){
+        return '0' + date;
+      } else {
       return date;
+    }
     }
     function getCurrentMonth(){
       const dataDateMonth = new Date((item.dt) * 1000);
